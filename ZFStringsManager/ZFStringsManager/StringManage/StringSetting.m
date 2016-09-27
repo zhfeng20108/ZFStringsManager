@@ -30,7 +30,7 @@
     projectSetting.language = language;
     if (language == StringLanguageSwift) {
         //key will be replace with "value"
-        projectSetting.doubleClickWrapper = @"NSLocalizedString(key, comment: "")";
+        projectSetting.doubleClickWrapper = @"NSLocalizedString(key, comment: \"\")";
     }else{
         //key will be replace with @"value"
         projectSetting.doubleClickWrapper = @"NSLocalizedString(key, nil)";
@@ -104,9 +104,9 @@ static NSString *searchProjectName = @"searchProjectName";
     if (_language == StringLanguageSwift) {
         //key will be replace with "value"
         if ([self.searchTableName isEqualToString:@"Localizable.strings"]) {
-            _doubleClickWrapper = @"NSLocalizedString(key, comment: "")";
+            _doubleClickWrapper = @"NSLocalizedString(key, comment: \"\")";
         } else {
-            _doubleClickWrapper = [NSString stringWithFormat:@"NSLocalizedStringFromTable(key, \"%@\", comment: "")",[self.searchTableName stringByDeletingPathExtension]];
+            _doubleClickWrapper = [NSString stringWithFormat:@"NSLocalizedStringFromTable(key, \"%@\", comment: \"\")",[self.searchTableName stringByDeletingPathExtension]];
         }
     }else{
         //key will be replace with @"value"
