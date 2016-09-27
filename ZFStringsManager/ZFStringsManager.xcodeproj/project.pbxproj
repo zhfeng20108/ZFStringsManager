@@ -1,0 +1,436 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		B2E3CD071D93AB0B00C62B03 /* update.sh in Resources */ = {isa = PBXBuildFile; fileRef = B2E3CD061D93AB0B00C62B03 /* update.sh */; };
+		B2ECD4DE1D911DC400717B03 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B2ECD4DD1D911DC400717B03 /* AppDelegate.m */; };
+		B2ECD4E11D911DC400717B03 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B2ECD4E01D911DC400717B03 /* main.m */; };
+		B2ECD4E31D911DC400717B03 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B2ECD4E21D911DC400717B03 /* Assets.xcassets */; };
+		B2ECD4E61D911DC400717B03 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = B2ECD4E41D911DC400717B03 /* MainMenu.xib */; };
+		B2ECD50B1D911EE900717B03 /* NSArray+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = B2ECD4F01D911EE900717B03 /* NSArray+Extension.m */; };
+		B2ECD50C1D911EE900717B03 /* NSButton+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = B2ECD4F21D911EE900717B03 /* NSButton+Extension.m */; };
+		B2ECD50D1D911EE900717B03 /* NSData+Split.m in Sources */ = {isa = PBXBuildFile; fileRef = B2ECD4F41D911EE900717B03 /* NSData+Split.m */; };
+		B2ECD50E1D911EE900717B03 /* NSString+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = B2ECD4F61D911EE900717B03 /* NSString+Extension.m */; };
+		B2ECD50F1D911EE900717B03 /* PreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2ECD4F81D911EE900717B03 /* PreferencesWindowController.m */; };
+		B2ECD5101D911EE900717B03 /* PreferencesWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B2ECD4F91D911EE900717B03 /* PreferencesWindowController.xib */; };
+		B2ECD5111D911EE900717B03 /* StringEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2ECD4FB1D911EE900717B03 /* StringEditViewController.m */; };
+		B2ECD5121D911EE900717B03 /* StringEditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B2ECD4FC1D911EE900717B03 /* StringEditViewController.xib */; };
+		B2ECD5131D911EE900717B03 /* StringInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2ECD4FE1D911EE900717B03 /* StringInfoViewController.m */; };
+		B2ECD5141D911EE900717B03 /* StringManage.m in Sources */ = {isa = PBXBuildFile; fileRef = B2ECD5001D911EE900717B03 /* StringManage.m */; };
+		B2ECD5151D911EE900717B03 /* StringModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B2ECD5021D911EE900717B03 /* StringModel.m */; };
+		B2ECD5161D911EE900717B03 /* StringPathEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2ECD5041D911EE900717B03 /* StringPathEditViewController.m */; };
+		B2ECD5171D911EE900717B03 /* StringPathEditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B2ECD5051D911EE900717B03 /* StringPathEditViewController.xib */; };
+		B2ECD5181D911EE900717B03 /* StringSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = B2ECD5071D911EE900717B03 /* StringSetting.m */; };
+		B2ECD5191D911EE900717B03 /* StringWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2ECD5091D911EE900717B03 /* StringWindowController.m */; };
+		B2ECD51A1D911EE900717B03 /* StringWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B2ECD50A1D911EE900717B03 /* StringWindowController.xib */; };
+		B2ECD51E1D911FCF00717B03 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B2ECD5201D911FCF00717B03 /* Localizable.strings */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		B2CEC62C1D9269A100FEB516 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		B2CEC62D1D9269A200FEB516 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/MainMenu.strings"; sourceTree = "<group>"; };
+		B2CEC62E1D9269A700FEB516 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/MainMenu.strings; sourceTree = "<group>"; };
+		B2CEC62F1D9269A700FEB516 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
+		B2E3CD061D93AB0B00C62B03 /* update.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = update.sh; sourceTree = "<group>"; };
+		B2ECD4D91D911DC400717B03 /* ZFStringsManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZFStringsManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B2ECD4DC1D911DC400717B03 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		B2ECD4DD1D911DC400717B03 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		B2ECD4E01D911DC400717B03 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		B2ECD4E21D911DC400717B03 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B2ECD4E51D911DC400717B03 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		B2ECD4E71D911DC400717B03 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B2ECD4EF1D911EE900717B03 /* NSArray+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Extension.h"; sourceTree = "<group>"; };
+		B2ECD4F01D911EE900717B03 /* NSArray+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Extension.m"; sourceTree = "<group>"; };
+		B2ECD4F11D911EE900717B03 /* NSButton+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSButton+Extension.h"; sourceTree = "<group>"; };
+		B2ECD4F21D911EE900717B03 /* NSButton+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSButton+Extension.m"; sourceTree = "<group>"; };
+		B2ECD4F31D911EE900717B03 /* NSData+Split.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Split.h"; sourceTree = "<group>"; };
+		B2ECD4F41D911EE900717B03 /* NSData+Split.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Split.m"; sourceTree = "<group>"; };
+		B2ECD4F51D911EE900717B03 /* NSString+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Extension.h"; sourceTree = "<group>"; };
+		B2ECD4F61D911EE900717B03 /* NSString+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Extension.m"; sourceTree = "<group>"; };
+		B2ECD4F71D911EE900717B03 /* PreferencesWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreferencesWindowController.h; sourceTree = "<group>"; };
+		B2ECD4F81D911EE900717B03 /* PreferencesWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreferencesWindowController.m; sourceTree = "<group>"; };
+		B2ECD4F91D911EE900717B03 /* PreferencesWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PreferencesWindowController.xib; sourceTree = "<group>"; };
+		B2ECD4FA1D911EE900717B03 /* StringEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StringEditViewController.h; sourceTree = "<group>"; };
+		B2ECD4FB1D911EE900717B03 /* StringEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StringEditViewController.m; sourceTree = "<group>"; };
+		B2ECD4FC1D911EE900717B03 /* StringEditViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StringEditViewController.xib; sourceTree = "<group>"; };
+		B2ECD4FD1D911EE900717B03 /* StringInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StringInfoViewController.h; sourceTree = "<group>"; };
+		B2ECD4FE1D911EE900717B03 /* StringInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StringInfoViewController.m; sourceTree = "<group>"; };
+		B2ECD4FF1D911EE900717B03 /* StringManage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StringManage.h; sourceTree = "<group>"; };
+		B2ECD5001D911EE900717B03 /* StringManage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StringManage.m; sourceTree = "<group>"; };
+		B2ECD5011D911EE900717B03 /* StringModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StringModel.h; sourceTree = "<group>"; };
+		B2ECD5021D911EE900717B03 /* StringModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StringModel.m; sourceTree = "<group>"; };
+		B2ECD5031D911EE900717B03 /* StringPathEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StringPathEditViewController.h; sourceTree = "<group>"; };
+		B2ECD5041D911EE900717B03 /* StringPathEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StringPathEditViewController.m; sourceTree = "<group>"; };
+		B2ECD5051D911EE900717B03 /* StringPathEditViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StringPathEditViewController.xib; sourceTree = "<group>"; };
+		B2ECD5061D911EE900717B03 /* StringSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StringSetting.h; sourceTree = "<group>"; };
+		B2ECD5071D911EE900717B03 /* StringSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StringSetting.m; sourceTree = "<group>"; };
+		B2ECD5081D911EE900717B03 /* StringWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StringWindowController.h; sourceTree = "<group>"; };
+		B2ECD5091D911EE900717B03 /* StringWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StringWindowController.m; sourceTree = "<group>"; };
+		B2ECD50A1D911EE900717B03 /* StringWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StringWindowController.xib; sourceTree = "<group>"; };
+		B2ECD51B1D911F8400717B03 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/MainMenu.strings"; sourceTree = "<group>"; };
+		B2ECD51F1D911FCF00717B03 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		B2ECD5211D911FD600717B03 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		B2ECD4D61D911DC400717B03 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		B2ECD4D01D911DC400717B03 = {
+			isa = PBXGroup;
+			children = (
+				B2ECD4DB1D911DC400717B03 /* ZFStringsManager */,
+				B2ECD4DA1D911DC400717B03 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		B2ECD4DA1D911DC400717B03 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B2ECD4D91D911DC400717B03 /* ZFStringsManager.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B2ECD4DB1D911DC400717B03 /* ZFStringsManager */ = {
+			isa = PBXGroup;
+			children = (
+				B2ECD4DC1D911DC400717B03 /* AppDelegate.h */,
+				B2ECD4DD1D911DC400717B03 /* AppDelegate.m */,
+				B2ECD4ED1D911EE900717B03 /* StringManage */,
+				B2ECD4E21D911DC400717B03 /* Assets.xcassets */,
+				B2ECD4E41D911DC400717B03 /* MainMenu.xib */,
+				B2ECD4E71D911DC400717B03 /* Info.plist */,
+				B2ECD4DF1D911DC400717B03 /* Supporting Files */,
+			);
+			path = ZFStringsManager;
+			sourceTree = "<group>";
+		};
+		B2ECD4DF1D911DC400717B03 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				B2E3CD061D93AB0B00C62B03 /* update.sh */,
+				B2ECD4E01D911DC400717B03 /* main.m */,
+				B2ECD5201D911FCF00717B03 /* Localizable.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		B2ECD4ED1D911EE900717B03 /* StringManage */ = {
+			isa = PBXGroup;
+			children = (
+				B2ECD4EE1D911EE900717B03 /* Categorys */,
+				B2ECD4F71D911EE900717B03 /* PreferencesWindowController.h */,
+				B2ECD4F81D911EE900717B03 /* PreferencesWindowController.m */,
+				B2ECD4F91D911EE900717B03 /* PreferencesWindowController.xib */,
+				B2ECD4FA1D911EE900717B03 /* StringEditViewController.h */,
+				B2ECD4FB1D911EE900717B03 /* StringEditViewController.m */,
+				B2ECD4FC1D911EE900717B03 /* StringEditViewController.xib */,
+				B2ECD4FD1D911EE900717B03 /* StringInfoViewController.h */,
+				B2ECD4FE1D911EE900717B03 /* StringInfoViewController.m */,
+				B2ECD4FF1D911EE900717B03 /* StringManage.h */,
+				B2ECD5001D911EE900717B03 /* StringManage.m */,
+				B2ECD5011D911EE900717B03 /* StringModel.h */,
+				B2ECD5021D911EE900717B03 /* StringModel.m */,
+				B2ECD5031D911EE900717B03 /* StringPathEditViewController.h */,
+				B2ECD5041D911EE900717B03 /* StringPathEditViewController.m */,
+				B2ECD5051D911EE900717B03 /* StringPathEditViewController.xib */,
+				B2ECD5061D911EE900717B03 /* StringSetting.h */,
+				B2ECD5071D911EE900717B03 /* StringSetting.m */,
+				B2ECD5081D911EE900717B03 /* StringWindowController.h */,
+				B2ECD5091D911EE900717B03 /* StringWindowController.m */,
+				B2ECD50A1D911EE900717B03 /* StringWindowController.xib */,
+			);
+			path = StringManage;
+			sourceTree = "<group>";
+		};
+		B2ECD4EE1D911EE900717B03 /* Categorys */ = {
+			isa = PBXGroup;
+			children = (
+				B2ECD4EF1D911EE900717B03 /* NSArray+Extension.h */,
+				B2ECD4F01D911EE900717B03 /* NSArray+Extension.m */,
+				B2ECD4F11D911EE900717B03 /* NSButton+Extension.h */,
+				B2ECD4F21D911EE900717B03 /* NSButton+Extension.m */,
+				B2ECD4F31D911EE900717B03 /* NSData+Split.h */,
+				B2ECD4F41D911EE900717B03 /* NSData+Split.m */,
+				B2ECD4F51D911EE900717B03 /* NSString+Extension.h */,
+				B2ECD4F61D911EE900717B03 /* NSString+Extension.m */,
+			);
+			path = Categorys;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		B2ECD4D81D911DC400717B03 /* ZFStringsManager */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B2ECD4EA1D911DC400717B03 /* Build configuration list for PBXNativeTarget "ZFStringsManager" */;
+			buildPhases = (
+				B2ECD4D51D911DC400717B03 /* Sources */,
+				B2ECD4D61D911DC400717B03 /* Frameworks */,
+				B2ECD4D71D911DC400717B03 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ZFStringsManager;
+			productName = ZFStringsManager;
+			productReference = B2ECD4D91D911DC400717B03 /* ZFStringsManager.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		B2ECD4D11D911DC400717B03 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0800;
+				ORGANIZATIONNAME = zhangfeng;
+				TargetAttributes = {
+					B2ECD4D81D911DC400717B03 = {
+						CreatedOnToolsVersion = 8.0;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = B2ECD4D41D911DC400717B03 /* Build configuration list for PBXProject "ZFStringsManager" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+				"zh-Hant",
+				ja,
+			);
+			mainGroup = B2ECD4D01D911DC400717B03;
+			productRefGroup = B2ECD4DA1D911DC400717B03 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B2ECD4D81D911DC400717B03 /* ZFStringsManager */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		B2ECD4D71D911DC400717B03 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B2ECD51A1D911EE900717B03 /* StringWindowController.xib in Resources */,
+				B2E3CD071D93AB0B00C62B03 /* update.sh in Resources */,
+				B2ECD5171D911EE900717B03 /* StringPathEditViewController.xib in Resources */,
+				B2ECD5101D911EE900717B03 /* PreferencesWindowController.xib in Resources */,
+				B2ECD51E1D911FCF00717B03 /* Localizable.strings in Resources */,
+				B2ECD5121D911EE900717B03 /* StringEditViewController.xib in Resources */,
+				B2ECD4E31D911DC400717B03 /* Assets.xcassets in Resources */,
+				B2ECD4E61D911DC400717B03 /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B2ECD4D51D911DC400717B03 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B2ECD50D1D911EE900717B03 /* NSData+Split.m in Sources */,
+				B2ECD5111D911EE900717B03 /* StringEditViewController.m in Sources */,
+				B2ECD5131D911EE900717B03 /* StringInfoViewController.m in Sources */,
+				B2ECD50E1D911EE900717B03 /* NSString+Extension.m in Sources */,
+				B2ECD50C1D911EE900717B03 /* NSButton+Extension.m in Sources */,
+				B2ECD5141D911EE900717B03 /* StringManage.m in Sources */,
+				B2ECD5191D911EE900717B03 /* StringWindowController.m in Sources */,
+				B2ECD50F1D911EE900717B03 /* PreferencesWindowController.m in Sources */,
+				B2ECD50B1D911EE900717B03 /* NSArray+Extension.m in Sources */,
+				B2ECD5151D911EE900717B03 /* StringModel.m in Sources */,
+				B2ECD4E11D911DC400717B03 /* main.m in Sources */,
+				B2ECD5161D911EE900717B03 /* StringPathEditViewController.m in Sources */,
+				B2ECD5181D911EE900717B03 /* StringSetting.m in Sources */,
+				B2ECD4DE1D911DC400717B03 /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		B2ECD4E41D911DC400717B03 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B2ECD4E51D911DC400717B03 /* Base */,
+				B2ECD51B1D911F8400717B03 /* zh-Hans */,
+				B2CEC62D1D9269A200FEB516 /* zh-Hant */,
+				B2CEC62E1D9269A700FEB516 /* ja */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+		B2ECD5201D911FCF00717B03 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B2ECD51F1D911FCF00717B03 /* zh-Hans */,
+				B2ECD5211D911FD600717B03 /* en */,
+				B2CEC62C1D9269A100FEB516 /* zh-Hant */,
+				B2CEC62F1D9269A700FEB516 /* ja */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		B2ECD4E81D911DC400717B03 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		B2ECD4E91D911DC400717B03 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		B2ECD4EB1D911DC400717B03 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = ZFStringsManager/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				PRODUCT_BUNDLE_IDENTIFIER = feng.zhang.ZFStringsManager;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		B2ECD4EC1D911DC400717B03 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = ZFStringsManager/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				PRODUCT_BUNDLE_IDENTIFIER = feng.zhang.ZFStringsManager;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		B2ECD4D41D911DC400717B03 /* Build configuration list for PBXProject "ZFStringsManager" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B2ECD4E81D911DC400717B03 /* Debug */,
+				B2ECD4E91D911DC400717B03 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B2ECD4EA1D911DC400717B03 /* Build configuration list for PBXNativeTarget "ZFStringsManager" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B2ECD4EB1D911DC400717B03 /* Debug */,
+				B2ECD4EC1D911DC400717B03 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = B2ECD4D11D911DC400717B03 /* Project object */;
+}
