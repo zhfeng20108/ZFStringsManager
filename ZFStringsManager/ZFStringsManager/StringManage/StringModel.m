@@ -382,7 +382,7 @@ typedef void (^OnFindedItem)(NSString* fullPath, BOOL isDirectory, BOOL* skipThi
         return nil;
     }
     
-    NSString *regPattern = [NSString stringWithFormat:@"%@\\(@?\"(\\w+)\"",warpperArr[0]];
+    NSString *regPattern = [NSString stringWithFormat:@"%@\\(@?\".{0,}\"",warpperArr[0]];
     NSRegularExpression *regularExpression = [NSRegularExpression regularExpressionWithPattern:regPattern options:0 error:nil];
     
     __block NSMutableDictionary *dict = [NSMutableDictionary dictionary];
@@ -395,23 +395,27 @@ typedef void (^OnFindedItem)(NSString* fullPath, BOOL isDirectory, BOOL* skipThi
             NSArray *array = [regularExpression matchesInString:line options:0 range:NSMakeRange(0, line.length)];
             if (array.count > 0 ) {
                 for (NSTextCheckingResult *result in array) {
-                    if (result.range.location != NSNotFound && result.numberOfRanges == 2) {
-                        NSRange valueRange = [result rangeAtIndex:1];
+                    if (result.range.location != NSNotFound) {
+                        NSRange valueRange = [result rangeAtIndex:0];
                         if(valueRange.location != NSNotFound){
                             NSString *value = [line substringWithRange:valueRange];
-                            
-                            StringItem *item = [[StringItem alloc]init];
-                            item.lineNumber = lineNum;
-                            item.filePath = filePath;
-                            item.content = line;
-                            
-                            if ([dict objectForKey:value]) {
-                                NSArray *originItems = dict[value];
-                                NSMutableArray *temp = [[NSMutableArray alloc] initWithArray:originItems];
-                                [temp addObject:item];
-                                [dict setObject:temp forKey:value];
-                            }else{
-                                [dict setObject:@[item] forKey:value];
+                            NSArray *arr = [findStrings filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(NSString*  _Nullable evaluatedObject, NSDictionary<NSString *,id> * _Nullable bindings) {
+                                return [value contain:[NSString stringWithFormat:@"\"%@\"",evaluatedObject]];
+                            }]];
+                            for (NSString *value in arr) {
+                                StringItem *item = [[StringItem alloc]init];
+                                item.lineNumber = lineNum;
+                                item.filePath = filePath;
+                                item.content = line;
+                                
+                                if ([dict objectForKey:value]) {
+                                    NSArray *originItems = dict[value];
+                                    NSMutableArray *temp = [[NSMutableArray alloc] initWithArray:originItems];
+                                    [temp addObject:item];
+                                    [dict setObject:temp forKey:value];
+                                }else{
+                                    [dict setObject:@[item] forKey:value];
+                                }
                             }
                         }
                     }
