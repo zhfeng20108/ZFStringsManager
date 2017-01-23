@@ -19,6 +19,7 @@
 #define kStrKey @"key"
 #define kRemove @"remove"
 #define kInfo @"info"
+#define kRowNo @"rowno"
 
 #define kFont [NSFont systemFontOfSize:11]
 
@@ -61,6 +62,7 @@
 @property (nonatomic, strong) NSString *sortingCol;
 @property (nonatomic) BOOL ascending;
 @property (nonatomic, strong) NSMutableDictionary *columnTitleDict;
+@property (nonatomic, strong) StringModel *hansModel;
 
 - (IBAction)addAction:(id)sender;
 - (IBAction)saveAction:(id)sender;
@@ -199,6 +201,13 @@
         [self.tableview addTableColumn:column];
     }
     
+    NSTableColumn * rowNumColumn = [[NSTableColumn alloc] initWithIdentifier:kRowNo];
+    self.columnTitleDict[kRowNo] = @"行号";
+    [rowNumColumn setWidth:80];
+    [rowNumColumn setMinWidth:60];
+    [rowNumColumn setMaxWidth:50];
+    [self.tableview addTableColumn:rowNumColumn];
+    
     NSTableColumn * lastcolumn = [[NSTableColumn alloc] initWithIdentifier:kRemove];
     self.columnTitleDict[kRemove] = LocalizedString(@"Remove");
     [lastcolumn setWidth:80];
@@ -214,6 +223,7 @@
     
     [self refreshTableColumn];
     [self searchAnswer:nil];
+    [self checkAction:nil];
 }
 
 -(void)refreshTableColumn{
@@ -385,7 +395,7 @@
             NSArray *tmp = [[NSArray alloc]initWithArray:keySet.allObjects];
             NSArray *sortedArray = [tmp sortedArrayUsingSelector:@selector(compare:)];
             [self.keyArray addObjectsFromArray:sortedArray];
-            
+            self.hansModel = [self findStringModelWithIdentifier:@"zh-Hans"];
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self refreshTableView];
                 self.isRefreshing = NO;
@@ -440,7 +450,13 @@
             
             return [key1 compare:key2];
         }];
-    } else if ([kInfo isEqualToString:_sortingCol]){
+    } else if ([kRowNo isEqualToString:_sortingCol] ){
+        self.showArray = [tmp2 sortedArrayUsingComparator:^NSComparisonResult(NSString * _Nonnull key1, NSString * _Nonnull key2) {
+            NSUInteger index1 = [self.hansModel.keyArray indexOfObject:key1];
+            NSUInteger index2 = [self.hansModel.keyArray indexOfObject:key2];
+            return  _ascending?index1>index2:index1<index2;
+        }];
+    }  else if ([kInfo isEqualToString:_sortingCol]){
         self.showArray = [tmp2 sortedArrayUsingComparator:^NSComparisonResult(NSString * _Nonnull key1, NSString * _Nonnull key2) {
             NSArray *items1 = self.infoDict[_ascending?key1:key2];
             NSInteger count1 = items1.count;
@@ -849,7 +865,26 @@
         return nil;
     NSString *identifier=[tableColumn identifier];
     NSString *key = self.showArray[row];
-    if([identifier isEqualToString:kRemove]){
+    if([identifier isEqualToString:kRowNo]){
+        NSTextField *aView = [tableView makeViewWithIdentifier:identifier owner:self];
+        if(!aView) {
+            aView = [[NSTextField alloc]initWithFrame:NSZeroRect];
+            [aView setTextColor:[NSColor blackColor]];
+            [aView setBordered:NO];
+            [aView setFont:kFont];
+            [aView setEditable:NO];
+            [aView setLineBreakMode:NSLineBreakByWordWrapping];
+            [aView setAlignment:NSTextAlignmentNatural];
+        }
+        [aView setTag:row];
+        [aView setIdentifier:identifier];
+        if(self.hansModel){
+            [aView setStringValue:[NSString stringWithFormat:@"%zd",[self.hansModel.keyArray indexOfObject:key]+2]];
+        } else {
+            [aView setStringValue:@""];
+        }
+        return aView;
+    } else if([identifier isEqualToString:kRemove]){
         NSButton *aView = [tableView makeViewWithIdentifier:identifier owner:self];
         if(!aView) {
             aView = [[NSButton alloc]initWithFrame:NSZeroRect];

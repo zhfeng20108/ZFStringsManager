@@ -24,7 +24,7 @@ static NSString * const kRegularExpressionPattern = @"^(\"([^/]\\S+.*)\"|([^/]\\
         self.path = path;
         self.filePath = [path stringByAppendingPathComponent:projectSetting.searchTableName];
         self.identifier = [[path lastPathComponent] stringByDeletingPathExtension];
-        
+        NSMutableArray *keyMuArr = [[NSMutableArray alloc] init];
         NSString *string = [NSString stringWithContentsOfFile:self.filePath usedEncoding:nil error:nil];
         
         NSRegularExpression *regularExpression = [NSRegularExpression regularExpressionWithPattern:kRegularExpressionPattern options:0 error:nil];
@@ -52,12 +52,14 @@ static NSString * const kRegularExpressionPattern = @"^(\"([^/]\\S+.*)\"|([^/]\\
             
             if (key && value) {
                 [dict setObject:value forKey:key];
+                [keyMuArr addObject:key];
             }
             
             // Move offset
             NSRange lineRange = [string lineRangeForRange:NSMakeRange(lineOffset, 0)];
             lineOffset += lineRange.length;
         }];
+        self.keyArray = keyMuArr;
         self.stringDictionary = [NSMutableDictionary dictionaryWithDictionary:dict];
     }
     return self;

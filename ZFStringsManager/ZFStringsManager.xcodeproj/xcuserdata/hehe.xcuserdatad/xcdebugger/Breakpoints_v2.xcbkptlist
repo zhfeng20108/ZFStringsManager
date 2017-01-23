@@ -10,75 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZFStringsManager/StringManage/StringWindowController.m"
-            timestampString = "503472532.69186"
+            timestampString = "506851317.817139"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "525"
-            endingLineNumber = "525"
-            landmarkName = "-addAction:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ZFStringsManager/StringManage/StringWindowController.m"
-            timestampString = "503472532.69186"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "518"
-            endingLineNumber = "518"
-            landmarkName = "-addAction:"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[StringWindowController searchAnswer:]"
-                  moduleName = "ZFStringsManager"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/hehe/ZFStringsManager/ZFStringsManager/ZFStringsManager/StringManage/StringWindowController.m"
-                  timestampString = "506747796.076731"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "518"
-                  endingLineNumber = "518"
-                  offsetFromSymbolStart = "7471">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__39-[StringWindowController searchAnswer:]_block_invoke.441"
-                  moduleName = "ZFStringsManager"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/hehe/ZFStringsManager/ZFStringsManager/ZFStringsManager/StringManage/StringWindowController.m"
-                  timestampString = "506747796.080623"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "518"
-                  endingLineNumber = "518"
-                  offsetFromSymbolStart = "16">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ZFStringsManager/StringManage/StringWindowController.m"
-            timestampString = "503472532.69186"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "539"
-            endingLineNumber = "539"
+            startingLineNumber = "555"
+            endingLineNumber = "555"
             landmarkName = "-saveAction:"
             landmarkType = "7">
          </BreakpointContent>
@@ -90,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZFStringsManager/StringManage/StringWindowController.m"
-            timestampString = "503305365.94497"
+            timestampString = "506850765.525999"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "410"
-            endingLineNumber = "410"
+            startingLineNumber = "420"
+            endingLineNumber = "420"
             landmarkName = "-searchAnswer:"
             landmarkType = "7">
          </BreakpointContent>
@@ -106,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZFStringsManager/StringManage/StringWindowController.m"
-            timestampString = "506747560.723694"
+            timestampString = "506851317.817139"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1027"
-            endingLineNumber = "1027">
+            startingLineNumber = "1062"
+            endingLineNumber = "1062">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -120,11 +56,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZFStringsManager/StringManage/StringWindowController.m"
-            timestampString = "506747560.723694"
+            timestampString = "506851317.817139"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "982"
-            endingLineNumber = "982">
+            startingLineNumber = "1017"
+            endingLineNumber = "1017">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -134,11 +70,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZFStringsManager/StringManage/StringWindowController.m"
-            timestampString = "506747560.723694"
+            timestampString = "506851317.817139"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "996"
-            endingLineNumber = "996">
+            startingLineNumber = "1031"
+            endingLineNumber = "1031">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -148,11 +84,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZFStringsManager/StringManage/StringWindowController.m"
-            timestampString = "503302509.377942"
+            timestampString = "506850765.525999"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "402"
-            endingLineNumber = "402"
+            startingLineNumber = "412"
+            endingLineNumber = "412"
             landmarkName = "-searchAnswer:"
             landmarkType = "7">
          </BreakpointContent>
@@ -164,11 +100,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZFStringsManager/StringManage/StringWindowController.m"
-            timestampString = "503305365.94497"
+            timestampString = "506850765.525999"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "425"
-            endingLineNumber = "425"
+            startingLineNumber = "435"
+            endingLineNumber = "435"
             landmarkName = "-searchAnswer:"
             landmarkType = "7">
             <Locations>
@@ -212,7 +148,53 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZFStringsManager/StringManage/StringWindowController.m"
-            timestampString = "506747560.723694"
+            timestampString = "506851317.817139"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "578"
+            endingLineNumber = "578"
+            landmarkName = "-saveSyncAction:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ZFStringsManager/StringManage/StringWindowController.m"
+            timestampString = "506851317.817139"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1032"
+            endingLineNumber = "1032">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ZFStringsManager/StringManage/StringWindowController.m"
+            timestampString = "506851317.817139"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "568"
+            endingLineNumber = "568"
+            landmarkName = "-saveSyncAction:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ZFStringsManager/StringManage/StringWindowController.m"
+            timestampString = "506851317.817139"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "562"
@@ -224,15 +206,17 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZFStringsManager/StringManage/StringWindowController.m"
-            timestampString = "506747560.723694"
+            timestampString = "506851317.817139"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "997"
-            endingLineNumber = "997">
+            startingLineNumber = "589"
+            endingLineNumber = "589"
+            landmarkName = "-saveSyncAction:"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -241,13 +225,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ZFStringsManager/StringManage/StringWindowController.m"
-            timestampString = "503472532.69186"
+            filePath = "ZFStringsManager/StringManage/StringModel.m"
+            timestampString = "506849971.271905"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "552"
-            endingLineNumber = "552"
-            landmarkName = "-saveSyncAction:"
+            startingLineNumber = "381"
+            endingLineNumber = "381"
+            landmarkName = "+findItemsWithProjectSetting:projectPath:includeDirs:excludeDirs:fileTypes:tempFilePath:findStrings:block:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -258,59 +242,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZFStringsManager/StringManage/StringWindowController.m"
-            timestampString = "506746201.795497"
+            timestampString = "506850765.525999"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "440"
-            endingLineNumber = "440"
-            landmarkName = "-searchAnswer:"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[StringWindowController searchAnswer:]"
-                  moduleName = "ZFStringsManager"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/hehe/ZFStringsManager/ZFStringsManager/ZFStringsManager/StringManage/StringWindowController.m"
-                  timestampString = "506762148.404312"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "440"
-                  endingLineNumber = "440"
-                  offsetFromSymbolStart = "1253">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[StringWindowController searchAnswer:]"
-                  moduleName = "ZFStringsManager"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/hehe/ZFStringsManager/ZFStringsManager/ZFStringsManager/StringManage/StringWindowController.m"
-                  timestampString = "506762148.406463"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "440"
-                  endingLineNumber = "440"
-                  offsetFromSymbolStart = "1261">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ZFStringsManager/StringManage/StringWindowController.m"
-            timestampString = "506747142.657918"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "444"
-            endingLineNumber = "444"
+            startingLineNumber = "446"
+            endingLineNumber = "446"
             landmarkName = "-searchAnswer:"
             landmarkType = "7">
          </BreakpointContent>
@@ -322,12 +258,44 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZFStringsManager/StringManage/StringWindowController.m"
-            timestampString = "506747145.265915"
+            timestampString = "506850765.525999"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "443"
-            endingLineNumber = "443"
-            landmarkName = "-searchAnswer:"
+            startingLineNumber = "388"
+            endingLineNumber = "388"
+            landmarkName = "-refresh:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ZFStringsManager/StringManage/StringModel.m"
+            timestampString = "506849733.015883"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "53"
+            endingLineNumber = "53"
+            landmarkName = "-initWithPath:projectSetting:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ZFStringsManager/StringManage/StringModel.m"
+            timestampString = "506849971.271905"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "63"
+            endingLineNumber = "63"
+            landmarkName = "-initWithPath:projectSetting:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -338,12 +306,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZFStringsManager/StringManage/StringWindowController.m"
-            timestampString = "506747762.956478"
+            timestampString = "506851317.817139"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "546"
-            endingLineNumber = "546"
-            landmarkName = "-saveSyncAction:"
+            startingLineNumber = "869"
+            endingLineNumber = "869"
+            landmarkName = "-tableView:viewForTableColumn:row:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ZFStringsManager/StringManage/StringWindowController.m"
+            timestampString = "506850765.525999"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "258"
+            endingLineNumber = "258"
+            landmarkName = "-valueInRaw:identifier:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -354,45 +338,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZFStringsManager/StringManage/StringWindowController.m"
-            timestampString = "506747766.963771"
+            timestampString = "506851669.794216"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "513"
-            endingLineNumber = "513"
-            landmarkName = "-addAction:"
+            startingLineNumber = "507"
+            endingLineNumber = "507"
+            landmarkName = "-checkAction:"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__36-[StringWindowController addAction:]_block_invoke"
-                  moduleName = "ZFStringsManager"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/hehe/ZFStringsManager/ZFStringsManager/ZFStringsManager/StringManage/StringWindowController.m"
-                  timestampString = "506847768.147054"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "513"
-                  endingLineNumber = "513"
-                  offsetFromSymbolStart = "486">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__36-[StringWindowController addAction:]_block_invoke"
-                  moduleName = "ZFStringsManager"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/hehe/ZFStringsManager/ZFStringsManager/ZFStringsManager/StringManage/StringWindowController.m"
-                  timestampString = "506847768.149845"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "513"
-                  endingLineNumber = "513"
-                  offsetFromSymbolStart = "505">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -402,12 +354,76 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZFStringsManager/StringManage/StringWindowController.m"
-            timestampString = "506760685.706848"
+            timestampString = "506851672.810231"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "573"
-            endingLineNumber = "573"
-            landmarkName = "-saveSyncAction:"
+            startingLineNumber = "497"
+            endingLineNumber = "497"
+            landmarkName = "-checkAction:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ZFStringsManager/StringManage/StringModel.m"
+            timestampString = "506853661.334087"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "382"
+            endingLineNumber = "382"
+            landmarkName = "+findItemsWithProjectSetting:projectPath:includeDirs:excludeDirs:fileTypes:tempFilePath:findStrings:block:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ZFStringsManager/StringManage/StringModel.m"
+            timestampString = "506853680.494462"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "388"
+            endingLineNumber = "388"
+            landmarkName = "+findItemsWithProjectSetting:projectPath:includeDirs:excludeDirs:fileTypes:tempFilePath:findStrings:block:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ZFStringsManager/StringManage/StringModel.m"
+            timestampString = "506853830.260836"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "407"
+            endingLineNumber = "407"
+            landmarkName = "+findItemsWithProjectSetting:projectPath:includeDirs:excludeDirs:fileTypes:tempFilePath:findStrings:block:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ZFStringsManager/StringManage/StringModel.m"
+            timestampString = "506853875.781102"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "408"
+            endingLineNumber = "408"
+            landmarkName = "+findItemsWithProjectSetting:projectPath:includeDirs:excludeDirs:fileTypes:tempFilePath:findStrings:block:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
