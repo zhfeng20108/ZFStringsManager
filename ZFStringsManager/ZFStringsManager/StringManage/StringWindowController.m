@@ -39,6 +39,7 @@
 @property (weak) IBOutlet NSButton *showOnlyBtn;
 @property (weak) IBOutlet NSButton *untranslatedBtn;
 @property (weak) IBOutlet NSButton *unusedBtn;
+@property (weak) IBOutlet NSButton *errorBtn;
 @property (weak) IBOutlet NSTextField *toastLabel;
 @property (weak) IBOutlet NSView *hud;
 @property (weak) IBOutlet NSTextField *descLabel;
@@ -123,6 +124,7 @@
     [self.showOnlyBtn setTitle:LocalizedString(@"OnlyShowModified")];
     [self.untranslatedBtn setTitle:LocalizedString(@"Untranslated")];
     [self.unusedBtn setTitle:LocalizedString(@"Unused")];
+    [self.errorBtn setTitle:@"参数出错(黄色)"];
     [self.searchField setPlaceholderString:LocalizedString(@"Search")];
     [self.saveBtn setTitle:LocalizedString(@"Save")];
     [self.saveSyncBtn setTitle:LocalizedString(@"Save and Sync")];
@@ -442,6 +444,57 @@
             [tmp2 removeObject:string];
         }
     }
+    
+    if (self.errorBtn.state) {
+        NSArray *paramArray = @[@"%",@"@",@"%@",@"%1$@",@"%2$@",@"%3$@",@"%4$@",@"%5$@",
+                                @"%d",@"%1$d",@"%2$d",@"%3$d",@"%4$d",@"%5$d",
+                                @"%ld",@"%1$ld",@"%2$ld",@"%3$ld",@"%4$ld",@"%5$ld",
+                                @"%lld",@"%1$lld",@"%2$lld",@"%3$lld",@"%4$lld",@"%5$lld",
+                                @"%zd",@"%1$zd",@"%2$zd",@"%3$zd",@"%4$zd",@"%5$zd"];
+        NSArray *pArr = @[@"%@",@"%d",@"%ld",@"%lld",@"%zd"];
+//        NSArray *arParamArray = @[@"@%",@"@$1%",@"@$2%",@"@$3%",@"@$4%",@"@$5%@",
+//                                  @"d%",@"d$1%",@"d$2%",@"d$3%",@"d$4%",@"d$5%@",
+//                                  @"ld%",@"ld$1%",@"ld$2%",@"ld$3%",@"ld$4%",@"ld$5%",
+//                                  @"lld%",@"lld$1%",@"lld$2%",@"lld$3%",@"lld$4%",@"lld$5%",
+//                                  @"zd%",@"zd$1%",@"zd$2%",@"zd$3%",@"zd$4%",@"zd$5%"];
+        NSArray *arPArr = @[@"@%",@"d%",@"ld%",@"lld%",@"zd%"];
+        for (NSString *string in [tmp2 copy]) {
+            NSString *hasValue = self.hansModel.stringDictionary[string];
+            BOOL keyExistError = NO;
+            for (StringModel *model in _stringArray) {
+                BOOL existError = NO;
+                NSString *str2 = model.stringDictionary[string];
+                BOOL isAr = [model.identifier isEqualToString:@"ar"];
+                NSArray *pArray = isAr ? arPArr: pArr;
+                for (NSString *p in pArray) {
+                    if ([str2 componentsSeparatedByString:p].count > 2) {
+                        existError = YES;
+                        break;
+                    }
+                }
+                if (!existError) {
+                    for (NSString *p in paramArray) {
+                        //检查参数个数是否一致
+                        NSUInteger n1 = [hasValue componentsSeparatedByString:p].count;
+                        NSUInteger n2 = [str2 componentsSeparatedByString:p].count;
+                        if (n1 != n2) {
+                            existError = YES;
+                            break;
+                        }
+                    }
+                }
+                
+                if (existError) {
+                    [model.errorKeySet addObject:string];
+                    keyExistError = YES;
+                }
+            }
+            if(!keyExistError) {
+                [tmp2 removeObject:string];
+            }
+        }
+    }
+    
     
     if ([kStrKey isEqualToString:_sortingCol] || [kRemove isEqualToString:_sortingCol]){
         self.showArray = [tmp2 sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
@@ -929,12 +982,25 @@
             }else if (status == KeyTypeAdd) {
                 [aView setBackgroundColor: [NSColor colorWithRed:0 green:0.8 blue:0 alpha:1.0]];
             }else{
-                [aView setBackgroundColor: [NSColor clearColor]];
+                StringModel *model = [self findStringModelWithIdentifier:identifier];
+                if ([model.errorKeySet containsObject:key]) {
+                    [aView setBackgroundColor: [NSColor yellowColor]];
+                } else {
+                    [aView setBackgroundColor: [NSColor clearColor]];
+                }
             }
             [aView setStringValue:_showArray[row]];
         }else{
             ActionModel *action = [self findActionWith:key identify:identifier];
-            NSString *rawValue = [self valueInRaw:key identifier:identifier];
+            NSString *rawValue = @"";
+            if([identifier isEqualToString:kStrKey]) {
+                rawValue =  key;
+            }
+            StringModel *model = [self findStringModelWithIdentifier:identifier];
+            if(model){
+                NSString *value = model.stringDictionary[key];
+                if(value.length>0) rawValue = value;
+            }
             if (action) {
                 if(action.actionType == ActionTypeRemove){
                     [aView setBackgroundColor:[NSColor redColor]];
@@ -947,7 +1013,11 @@
                 }
                 [aView setStringValue:action.value];
             }else{
-                [aView setBackgroundColor: [NSColor clearColor]];
+                if ([model.errorKeySet containsObject:key]) {
+                    [aView setBackgroundColor: [NSColor yellowColor]];
+                } else {
+                    [aView setBackgroundColor: [NSColor clearColor]];
+                }
                 [aView setStringValue:rawValue];
             }
         }

@@ -149,6 +149,7 @@ typedef void (^onFoundBlock)(float progress);
 @property (nonatomic, strong) NSString *identifier;//country code
 @property (nonatomic, strong) NSMutableDictionary *stringDictionary;//dictionary for all strings
 @property (nonatomic, strong) NSArray *keyArray;
+@property (nonatomic, strong) NSMutableSet *errorKeySet;
 
 -(void)doAction:(NSArray*)actions projectSetting:(StringSetting*)projectSetting;
 - (instancetype)initWithPath:(NSString*)path projectSetting:(StringSetting*)projectSetting;

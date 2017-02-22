@@ -24,6 +24,7 @@ static NSString * const kRegularExpressionPattern = @"^(\"([^/]\\S+.*)\"|([^/]\\
         self.path = path;
         self.filePath = [path stringByAppendingPathComponent:projectSetting.searchTableName];
         self.identifier = [[path lastPathComponent] stringByDeletingPathExtension];
+        self.errorKeySet = [NSMutableSet new];
         NSMutableArray *keyMuArr = [[NSMutableArray alloc] init];
         NSString *string = [NSString stringWithContentsOfFile:self.filePath usedEncoding:nil error:nil];
         
