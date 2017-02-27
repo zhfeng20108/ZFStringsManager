@@ -464,26 +464,29 @@
             for (StringModel *model in _stringArray) {
                 BOOL existError = NO;
                 NSString *str2 = model.stringDictionary[string];
-                BOOL isAr = [model.identifier isEqualToString:@"ar"];
-                NSArray *pArray = isAr ? arPArr: pArr;
-                for (NSString *p in pArray) {
-                    if ([str2 componentsSeparatedByString:p].count > 2) {
-                        existError = YES;
-                        break;
-                    }
-                }
-                if (!existError) {
-                    for (NSString *p in paramArray) {
-                        //检查参数个数是否一致
-                        NSUInteger n1 = [hasValue componentsSeparatedByString:p].count;
-                        NSUInteger n2 = [str2 componentsSeparatedByString:p].count;
-                        if (n1 != n2) {
+                if ([str2 isEqualToString:@"#N/A"]) {
+                    existError = YES;
+                } else {
+                    BOOL isAr = [model.identifier isEqualToString:@"ar"];
+                    NSArray *pArray = isAr ? arPArr: pArr;
+                    for (NSString *p in pArray) {
+                        if ([str2 componentsSeparatedByString:p].count > 2) {
                             existError = YES;
                             break;
                         }
                     }
+                    if (!existError) {
+                        for (NSString *p in paramArray) {
+                            //检查参数个数是否一致
+                            NSUInteger n1 = [hasValue componentsSeparatedByString:p].count;
+                            NSUInteger n2 = [str2 componentsSeparatedByString:p].count;
+                            if (n1 != n2) {
+                                existError = YES;
+                                break;
+                            }
+                        }
+                    }
                 }
-                
                 if (existError) {
                     [model.errorKeySet addObject:string];
                     keyExistError = YES;
