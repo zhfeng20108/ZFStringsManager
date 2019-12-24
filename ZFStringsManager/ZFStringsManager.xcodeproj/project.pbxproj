@@ -211,10 +211,12 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 				"zh-Hant",
 				ja,
+				"zh-Hans",
 			);
 			mainGroup = B2ECD4D01D911DC400717B03;
 			productRefGroup = B2ECD4DA1D911DC400717B03 /* Products */;

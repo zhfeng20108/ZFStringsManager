@@ -106,7 +106,7 @@
     self.keyDict = [[NSMutableDictionary alloc]init];
     
     self.window.level = NSNormalWindowLevel;
-//    self.window.hidesOnDeactivate = YES;
+    //    self.window.hidesOnDeactivate = YES;
     [self.window setTitle:[NSString stringWithFormat:@"%@ ( V%@ )",LocalizedString(@"StringManage"),[[NSBundle mainBundle] infoDictionary][@"CFBundleShortVersionString"]]];
     
     self.tableview.delegate=self;
@@ -407,136 +407,143 @@
 }
 
 - (IBAction)searchAnswer:(id)sender {
-    
-    NSSet *keys = [NSSet setWithArray:[self.infoDict allKeys]];
-    NSMutableSet *set1 = [[NSMutableSet alloc] initWithArray:_keyArray];
-    [set1 unionSet:keys];
-    
-    NSString *searchString = _searchField.stringValue;
-    NSMutableArray *tmp2 = [NSMutableArray array];
-    if(self.showOnlyBtn.state){
-        for (ActionModel *model in _actionArray) {
-            if (![tmp2 containsObject:model.key]) {
-                [tmp2 addObject:model.key];
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        
+        NSSet *keys = [NSSet setWithArray:[self.infoDict allKeys]];
+        NSMutableSet *set1 = [[NSMutableSet alloc] initWithArray:_keyArray];
+        [set1 unionSet:keys];
+        
+        NSString *searchString = _searchField.stringValue;
+        NSMutableArray *tmp2 = [NSMutableArray array];
+        if(self.showOnlyBtn.state){
+            for (ActionModel *model in _actionArray) {
+                if (![tmp2 containsObject:model.key]) {
+                    [tmp2 addObject:model.key];
+                }
             }
+        }else{
+            [tmp2 addObjectsFromArray:[set1 allObjects]];
         }
-    }else{
-        [tmp2 addObjectsFromArray:[set1 allObjects]];
-    }
-    
-    for (NSString *string in [tmp2 copy]) {
-        if(self.unusedBtn.state){
-            NSArray *arr = self.infoDict[string];
-            if (arr.count > 0) {
+        
+        for (NSString *string in [tmp2 copy]) {
+            if(self.unusedBtn.state){
+                NSArray *arr = self.infoDict[string];
+                if (arr.count > 0) {
+                    [tmp2 removeObject:string];
+                }
+            }
+            
+            BOOL exist = YES;
+            BOOL found = searchString.length==0 || [string contain:searchString];
+            for (StringModel *model in _stringArray) {
+                NSString *str2 = model.stringDictionary[string];
+                ActionModel *action = [self findActionWith:string identify:model.identifier];
+                exist = exist && (str2.length || (action && action.value.length));
+                found = found || ([str2 contain:searchString] || (action && [action.value contain:searchString]));
+            }
+            if (!found || (found && self.untranslatedBtn.state && exist)) {
                 [tmp2 removeObject:string];
             }
         }
         
-        BOOL exist = YES;
-        BOOL found = searchString.length==0 || [string contain:searchString];
-        for (StringModel *model in _stringArray) {
-            NSString *str2 = model.stringDictionary[string];
-            ActionModel *action = [self findActionWith:string identify:model.identifier];
-            exist = exist && (str2.length || (action && action.value.length));
-            found = found || ([str2 contain:searchString] || (action && [action.value contain:searchString]));
-        }
-        if (!found || (found && self.untranslatedBtn.state && exist)) {
-            [tmp2 removeObject:string];
-        }
-    }
-    
-    if (self.errorBtn.state) {
-        NSArray *paramArray = @[@"%",@"@",@"%@",@"%1$@",@"%2$@",@"%3$@",@"%4$@",@"%5$@",
-                                @"%d",@"%1$d",@"%2$d",@"%3$d",@"%4$d",@"%5$d",
-                                @"%ld",@"%1$ld",@"%2$ld",@"%3$ld",@"%4$ld",@"%5$ld",
-                                @"%lld",@"%1$lld",@"%2$lld",@"%3$lld",@"%4$lld",@"%5$lld",
-                                @"%zd",@"%1$zd",@"%2$zd",@"%3$zd",@"%4$zd",@"%5$zd"];
-        NSArray *pArr = @[@"%@",@"%d",@"%ld",@"%lld",@"%zd"];
-//        NSArray *arParamArray = @[@"@%",@"@$1%",@"@$2%",@"@$3%",@"@$4%",@"@$5%@",
-//                                  @"d%",@"d$1%",@"d$2%",@"d$3%",@"d$4%",@"d$5%@",
-//                                  @"ld%",@"ld$1%",@"ld$2%",@"ld$3%",@"ld$4%",@"ld$5%",
-//                                  @"lld%",@"lld$1%",@"lld$2%",@"lld$3%",@"lld$4%",@"lld$5%",
-//                                  @"zd%",@"zd$1%",@"zd$2%",@"zd$3%",@"zd$4%",@"zd$5%"];
-        NSArray *arPArr = @[@"@%",@"d%",@"ld%",@"lld%",@"zd%"];
-        for (NSString *string in [tmp2 copy]) {
-            NSString *hasValue = self.hansModel.stringDictionary[string];
-            BOOL keyExistError = NO;
-            for (StringModel *model in _stringArray) {
-                BOOL existError = NO;
-                NSString *str2 = model.stringDictionary[string];
-                if ([str2 isEqualToString:@"#N/A"]) {
-                    existError = YES;
-                } else {
+        if (self.errorBtn.state) {
+            NSArray *paramArray = @[@"%@",@"%1$@",@"%2$@",@"%3$@",@"%4$@",@"%5$@",
+                                    @"%d",@"%1$d",@"%2$d",@"%3$d",@"%4$d",@"%5$d",
+                                    @"%ld",@"%1$ld",@"%2$ld",@"%3$ld",@"%4$ld",@"%5$ld",
+                                    @"%lld",@"%1$lld",@"%2$lld",@"%3$lld",@"%4$lld",@"%5$lld",
+                                    @"%zd",@"%1$zd",@"%2$zd",@"%3$zd",@"%4$zd",@"%5$zd",@"%.0f"];
+//            NSArray *arParamArray = @[@"@%",@"@$1%",@"@$2%",@"@$3%",@"@$4%",@"@$5%",
+//            @"d%",@"d$1%",@"d$2%",@"d$3%",@"d$4%",@"d$5%",
+//            @"ld%",@"ld$1%",@"ld$2%",@"ld$3%",@"ld$4%",@"ld$5%",
+//            @"lld%",@"lld$1%",@"lld$2%",@"lld$3%",@"lld$4%",@"lld$5%",
+//            @"zd%",@"zd$1%",@"zd$2%",@"zd$3%",@"zd$4%",@"%zd$5%",@"%.0f"];
+            NSArray *pArr = @[@"%@",@"%d",@"%ld",@"%lld",@"%zd"];
+            
+            NSArray *arPArr = @[@"@%",@"d%",@"ld%",@"lld%",@"zd%"];
+            for (NSString *string in [tmp2 copy]) {
+                NSString *hasValue = self.hansModel.stringDictionary[string];
+                BOOL keyExistError = NO;
+                for (StringModel *model in _stringArray) {
+                    BOOL existError = NO;
                     BOOL isAr = [model.identifier isEqualToString:@"ar"];
-                    NSArray *pArray = isAr ? arPArr: pArr;
-                    for (NSString *p in pArray) {
-                        if ([str2 componentsSeparatedByString:p].count > 2) {
-                            existError = YES;
-                            break;
-                        }
-                    }
-                    if (!existError) {
-                        for (NSString *p in paramArray) {
-                            //检查参数个数是否一致
-                            NSUInteger n1 = [hasValue componentsSeparatedByString:p].count;
-                            NSUInteger n2 = [str2 componentsSeparatedByString:p].count;
-                            if (n1 != n2) {
+                    NSString *str2 = model.stringDictionary[string];
+                    if ([str2 isEqualToString:@"#N/A"]) {
+                        existError = YES;
+                    } else {
+                        NSArray *pArray = isAr ? arPArr: pArr;
+                        for (NSString *p in pArray) {
+                            if ([str2 componentsSeparatedByString:p].count > 2) {
                                 existError = YES;
                                 break;
                             }
                         }
+                        if (!existError) {
+                            for (int i=0; i<paramArray.count; ++i) {
+                                NSString *p = paramArray[i];
+                                //检查参数个数是否一致
+                                NSUInteger n1 = [hasValue componentsSeparatedByString:p].count;
+                                NSUInteger n2 = [str2 componentsSeparatedByString:p].count;
+                                if (n1 != n2) {
+                                    existError = YES;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    if (existError) {
+                        [model.errorKeySet addObject:string];
+                        keyExistError = YES;
                     }
                 }
-                if (existError) {
-                    [model.errorKeySet addObject:string];
-                    keyExistError = YES;
+                if(!keyExistError) {
+                    [tmp2 removeObject:string];
                 }
             }
-            if(!keyExistError) {
-                [tmp2 removeObject:string];
-            }
         }
-    }
-    
-    
-    if ([kStrKey isEqualToString:_sortingCol] || [kRemove isEqualToString:_sortingCol]){
-        self.showArray = [tmp2 sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
-            NSString *key1 = _ascending?obj1:obj2;
-            NSString *key2 = _ascending?obj2:obj1;
+        
+        
+        if ([kStrKey isEqualToString:_sortingCol] || [kRemove isEqualToString:_sortingCol]){
+            self.showArray = [tmp2 sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+                NSString *key1 = _ascending?obj1:obj2;
+                NSString *key2 = _ascending?obj2:obj1;
+                
+                return [key1 compare:key2];
+            }];
+        } else if ([kRowNo isEqualToString:_sortingCol] ){
+            self.showArray = [tmp2 sortedArrayUsingComparator:^NSComparisonResult(NSString * _Nonnull key1, NSString * _Nonnull key2) {
+                NSUInteger index1 = [self.hansModel.keyArray indexOfObject:key1];
+                NSUInteger index2 = [self.hansModel.keyArray indexOfObject:key2];
+                return  _ascending?index1>index2:index1<index2;
+            }];
+        }  else if ([kInfo isEqualToString:_sortingCol]){
+            self.showArray = [tmp2 sortedArrayUsingComparator:^NSComparisonResult(NSString * _Nonnull key1, NSString * _Nonnull key2) {
+                NSArray *items1 = self.infoDict[_ascending?key1:key2];
+                NSInteger count1 = items1.count;
+                NSArray *items2 = self.infoDict[_ascending?key2:key1];
+                NSInteger count2 = items2.count;
+                if (count1 > count2) {
+                    return NSOrderedDescending;
+                } else if (count2 > count1) {
+                    return NSOrderedAscending;
+                } else {
+                    return NSOrderedSame;
+                }
+            }];
+        } else {
+            self.showArray = [tmp2 sortedArrayUsingComparator:^NSComparisonResult(NSString * _Nonnull key1, NSString * _Nonnull key2) {
+                NSString *rawValue1 = [self valueInRaw:_ascending?key1:key2 identifier:_sortingCol];
+                NSString *rawValue2 = [self valueInRaw:_ascending?key2:key1 identifier:_sortingCol];
+                return [rawValue1 compare:rawValue2];
+            }];
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
             
-            return [key1 compare:key2];
-        }];
-    } else if ([kRowNo isEqualToString:_sortingCol] ){
-        self.showArray = [tmp2 sortedArrayUsingComparator:^NSComparisonResult(NSString * _Nonnull key1, NSString * _Nonnull key2) {
-            NSUInteger index1 = [self.hansModel.keyArray indexOfObject:key1];
-            NSUInteger index2 = [self.hansModel.keyArray indexOfObject:key2];
-            return  _ascending?index1>index2:index1<index2;
-        }];
-    }  else if ([kInfo isEqualToString:_sortingCol]){
-        self.showArray = [tmp2 sortedArrayUsingComparator:^NSComparisonResult(NSString * _Nonnull key1, NSString * _Nonnull key2) {
-            NSArray *items1 = self.infoDict[_ascending?key1:key2];
-            NSInteger count1 = items1.count;
-            NSArray *items2 = self.infoDict[_ascending?key2:key1];
-            NSInteger count2 = items2.count;
-            if (count1 > count2) {
-                return NSOrderedDescending;
-            } else if (count2 > count1) {
-                return NSOrderedAscending;
-            } else {
-                return NSOrderedSame;
-            }
-        }];
-    } else {
-        self.showArray = [tmp2 sortedArrayUsingComparator:^NSComparisonResult(NSString * _Nonnull key1, NSString * _Nonnull key2) {
-            NSString *rawValue1 = [self valueInRaw:_ascending?key1:key2 identifier:_sortingCol];
-            NSString *rawValue2 = [self valueInRaw:_ascending?key2:key1 identifier:_sortingCol];
-            return [rawValue1 compare:rawValue2];
-        }];
-    }
-    
-    self.recordLabel.stringValue = [NSString stringWithFormat:LocalizedString(@"RecordNumMsg"),self.showArray.count];
-    [self.saveBtn setEnabled:(_actionArray.count>0 && !self.isChecking)];
-    [self.tableview reloadData];
+            self.recordLabel.stringValue = [NSString stringWithFormat:LocalizedString(@"RecordNumMsg"),self.showArray.count];
+            [self.saveBtn setEnabled:(_actionArray.count>0 && !self.isChecking)];
+            [self.tableview reloadData];
+        });
+        
+    });
 }
 
 - (IBAction)checkAction:(id)sender {
@@ -554,10 +561,10 @@
                                                           projectPath:weakSelf.projectPath
                                                           findStrings:weakSelf.showArray
                                                                 block:^(float progress) {
-                                                                    dispatch_async(dispatch_get_main_queue(), ^{
-                                                                        weakSelf.checkIndicator.doubleValue = progress;
-                                                                    });
-                                                                }];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                weakSelf.checkIndicator.doubleValue = progress;
+            });
+        }];
         dispatch_async(dispatch_get_main_queue(), ^{
             weakSelf.isChecking=NO;
             [weakSelf.infoDict addEntriesFromDictionary:dict];
@@ -630,17 +637,17 @@
     //写最新脚本到本地
     [[@"source " stringByAppendingString:setting.shellPath] writeToFile:shellPath atomically:YES encoding:NSUTF8StringEncoding error:NULL];
     //跑脚本
-     if(shellPath.length==0){
-     return;
-     }
+    if(shellPath.length==0){
+        return;
+    }
     
     self.hud.hidden = NO;
     self.syncIndicator.hidden = NO;
     [self.syncIndicator startAnimation:nil];
-     NSTask* task = [[NSTask alloc] init];
-     [task setLaunchPath:@"/bin/bash"];
-     [task setArguments:@[shellPath]];
-     [task launch];
+    NSTask* task = [[NSTask alloc] init];
+    [task setLaunchPath:@"/bin/bash"];
+    [task setArguments:@[shellPath]];
+    [task launch];
     task.terminationHandler = ^(NSTask *t){
         self.hud.hidden = YES;
         [self.syncIndicator stopAnimation:nil];
@@ -898,7 +905,7 @@
 }
 
 -(CGFloat)tableView:(NSTableView *)tableView heightOfRow:(NSInteger)row {
-    float height = 17;
+    float height = 0;
     NSString *key = _showArray[row];
     for (ActionModel *model in _actionArray) {
         if ([model.key isEqualToString:key]) {
@@ -907,12 +914,18 @@
             height = MAX(height, tmpHeight);
         }
     }
+    StringModel *maxHeightModel = nil;
     for (StringModel *model in _stringArray) {
-        NSString *tmp = model.stringDictionary[key];
-        NSTableColumn *column = [_tableview tableColumnWithIdentifier:model.identifier];
-        float tmpHeight = ceilf([tmp sizeWithWidth:column.width font:kFont].size.height);
-        height = MAX(height, tmpHeight);
+        float tmpHeight = [model.heightDictionary[key] floatValue];
+        if (tmpHeight > height) {
+            maxHeightModel = model;
+            height = tmpHeight;
+        }
     }
+    NSString *tmp = maxHeightModel.stringDictionary[key];
+    NSTableColumn *column = [_tableview tableColumnWithIdentifier:maxHeightModel.identifier];
+    float tmpHeight = ceilf([tmp sizeWithWidth:column.width font:kFont].size.height);
+    height = MAX(17, tmpHeight);
     return height;
 }
 
@@ -1021,7 +1034,11 @@
                 } else {
                     [aView setBackgroundColor: [NSColor clearColor]];
                 }
-                [aView setStringValue:rawValue];
+                //                [aView setStringValue:rawValue];
+                NSMutableAttributedString *attriStr =  [[NSMutableAttributedString alloc] initWithString:rawValue attributes:@{NSForegroundColorAttributeName:[NSColor blackColor]}];
+                NSRange range = [rawValue rangeOfString:_searchField.stringValue options:NSCaseInsensitiveSearch];
+                [attriStr setAttributes:@{NSForegroundColorAttributeName:[NSColor redColor]} range:range];
+                [aView setAttributedStringValue:attriStr];
             }
         }
         [aView setTag:row];

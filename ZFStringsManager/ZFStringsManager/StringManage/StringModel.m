@@ -13,7 +13,9 @@
 #import <objc/runtime.h>
 #include <mach-o/dyld.h>
 
-static NSString * const kRegularExpressionPattern = @"^(\"([^/]\\S+.*)\"|([^/]\\S+.*\\S+))\\s*=\\s*\"(.*)\";$";
+static NSString * const kRegularExpressionPattern = @"^(\"([^/]\\S+.*)\"|([^/]\\S+.*\\S+))\\s*=\\s*\"((.|\\s)*)\";$";
+static NSString * const kPreRegularExpressionPattern = @"^(\"([^/]\\S+.*)\"|([^/]\\S+.*\\S+))\\s*=\\s*\"((.|\\s)*)";
+static NSString * const kSuffixRegularExpressionPattern = @"(.*)\";$";
 
 @implementation StringModel
 
@@ -29,18 +31,22 @@ static NSString * const kRegularExpressionPattern = @"^(\"([^/]\\S+.*)\"|([^/]\\
         NSString *string = [NSString stringWithContentsOfFile:self.filePath usedEncoding:nil error:nil];
         
         NSRegularExpression *regularExpression = [NSRegularExpression regularExpressionWithPattern:kRegularExpressionPattern options:0 error:nil];
+        NSRegularExpression *preRegularExpression = [NSRegularExpression regularExpressionWithPattern:kPreRegularExpressionPattern options:0 error:nil];
+        NSRegularExpression *suffixRegularExpression = [NSRegularExpression regularExpressionWithPattern:kSuffixRegularExpressionPattern options:0 error:nil];
+
         
         __block NSInteger lineOffset = 0;
         __block NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+        __block NSMutableDictionary *heightDict = [NSMutableDictionary dictionary];
+        __block NSRange valueRange;
+        __block NSString *key = nil;
         [string enumerateLinesUsingBlock:^(NSString *line, BOOL *stop) {
             NSRange keyRange;
-            NSRange valueRange;
-            NSString *key = nil;
             NSString *value = nil;
-            
             // Find definition
             NSTextCheckingResult *result = [regularExpression firstMatchInString:line options:0 range:NSMakeRange(0, line.length)];
-            if (result.range.location != NSNotFound && result.numberOfRanges == 5) {
+
+            if (result.range.location != NSNotFound && result.numberOfRanges == 6) {
                 keyRange = [result rangeAtIndex:2];
                 if (keyRange.location == NSNotFound)
                     keyRange = [result rangeAtIndex:3];
@@ -49,11 +55,32 @@ static NSString * const kRegularExpressionPattern = @"^(\"([^/]\\S+.*)\"|([^/]\\
                 
                 key = [line substringWithRange:keyRange];
                 value = [line substringWithRange:valueRange];
+            } else {
+                NSTextCheckingResult *result = [preRegularExpression firstMatchInString:line options:0 range:NSMakeRange(0, line.length)];
+                if (result.range.location != NSNotFound && result.numberOfRanges == 6) {
+                    keyRange = [result rangeAtIndex:2];
+                    if (keyRange.location == NSNotFound)
+                        keyRange = [result rangeAtIndex:3];
+                    valueRange = [result rangeAtIndex:4];
+                    valueRange.location += lineOffset;
+
+                    key = [line substringWithRange:keyRange];
+                } else {
+                    NSTextCheckingResult *result = [suffixRegularExpression firstMatchInString:line options:0 range:NSMakeRange(0, line.length)];
+                    if (result.range.location != NSNotFound && result.numberOfRanges == 2) {
+                        valueRange.length += [result rangeAtIndex:1].length;
+                        value = [string substringWithRange:valueRange];
+                    } else {
+                        valueRange.length += line.length;
+                    }
+                }
             }
-            
             if (key && value) {
                 [dict setObject:value forKey:key];
                 [keyMuArr addObject:key];
+                NSString *tmp = value;
+                float tmpHeight = ceilf([tmp sizeWithWidth:10 font:[NSFont systemFontOfSize:11]].size.height);
+                [heightDict setObject:@(tmpHeight) forKey:key];
             }
             
             // Move offset
@@ -62,6 +89,7 @@ static NSString * const kRegularExpressionPattern = @"^(\"([^/]\\S+.*)\"|([^/]\\
         }];
         self.keyArray = keyMuArr;
         self.stringDictionary = [NSMutableDictionary dictionaryWithDictionary:dict];
+        self.heightDictionary = [NSDictionary dictionaryWithDictionary:heightDict];
     }
     return self;
 }

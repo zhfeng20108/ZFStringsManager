@@ -148,6 +148,7 @@ typedef void (^onFoundBlock)(float progress);
 @property (nonatomic, strong) NSString *filePath;
 @property (nonatomic, strong) NSString *identifier;//country code
 @property (nonatomic, strong) NSMutableDictionary *stringDictionary;//dictionary for all strings
+@property (nonatomic, strong) NSDictionary *heightDictionary;//dictionary for all strings
 @property (nonatomic, strong) NSArray *keyArray;
 @property (nonatomic, strong) NSMutableSet *errorKeySet;
 
