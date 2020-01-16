@@ -1,7 +1,7 @@
 "Add"= "追加";
 "Remove"= "削除";
 "Save"= "保存";
-"Save and Sync"= "保存と同期";
+"Save and Sync"= "与远端同步";
 "Save and Sync desc"= "\"%@\" 包含三大操作:(1) 拉取最新的git节点[需要申请git权限]";
 "NoLocalizedFiles"= "現地化言語ディレクトリを見つけていない";
 "Cancel"= "キャンセル";
@@ -12,7 +12,7 @@
 "SearchTableName"= "検索表名（含まれ.strings接尾辞）";
 "RecordNumMsg"= "%ld件の記録がある";
 "Preferences"= "設定";
-"StringManage"= "文字列管理";
+"StringManage"= "多语言校验器";
 "InputIsExist"= "文字列はすでに存在している";
 "Search"= "検索";
 "FoundNum"= "回数";

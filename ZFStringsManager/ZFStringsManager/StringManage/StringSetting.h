@@ -24,6 +24,10 @@ typedef enum : NSUInteger {
 @property (nonatomic , copy) NSArray* excludeDirs;
 @property (nonatomic , assign) NSInteger language;
 @property (nonatomic , assign) NSInteger maxOperationCount;
+@property (nonatomic , copy) NSString* feishu_appid;
+@property (nonatomic , copy) NSString* feishu_appsecret;
+@property (nonatomic , copy) NSString* feishu_chatid;
+@property (nonatomic , copy) NSString* feishu_atuserid;
 
 + (StringSetting*)defaultSettingWithProjectPath:(NSString *)projectPath projectName:(NSString*)projectName;
 @end

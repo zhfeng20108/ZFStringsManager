@@ -63,6 +63,7 @@ static NSString * const kSuffixRegularExpressionPattern = @"(.*)\";$";
                         keyRange = [result rangeAtIndex:3];
                     valueRange = [result rangeAtIndex:4];
                     valueRange.location += lineOffset;
+                    valueRange.length += 1;//+1是换行符
 
                     key = [line substringWithRange:keyRange];
                 } else {
@@ -71,7 +72,7 @@ static NSString * const kSuffixRegularExpressionPattern = @"(.*)\";$";
                         valueRange.length += [result rangeAtIndex:1].length;
                         value = [string substringWithRange:valueRange];
                     } else {
-                        valueRange.length += line.length;
+                        valueRange.length += line.length+1;//+1是换行符
                     }
                 }
             }

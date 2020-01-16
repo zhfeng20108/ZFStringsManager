@@ -15,11 +15,15 @@
 
 //@property (weak) IBOutlet NSWindow *window;
 @property (strong) NSWindow *window;
+@property (strong) NSStatusItem *statusItem;
 @end
 
 @implementation AppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
+    self.statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSSquareStatusItemLength];
+    self.statusItem.button.image = [NSImage imageNamed:@"icon"];
+    self.statusItem.action = @selector(statusItemClicked);
 //
    self.ctrl = [[StringWindowController alloc] init];
     self.window = self.ctrl.window;
@@ -71,6 +75,12 @@
         [self.window makeKeyAndOrderFront:self];
     }
     return YES;
+}
+
+- (void)statusItemClicked {
+    //主窗口显示
+    [NSApp activateIgnoringOtherApps:NO];
+    [self.window makeKeyAndOrderFront:self];
 }
 
 @end

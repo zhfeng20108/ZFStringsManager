@@ -36,6 +36,10 @@
         projectSetting.doubleClickWrapper = @"NSLocalizedString(key, nil)";
     }
     projectSetting.maxOperationCount = 5;
+    projectSetting.feishu_appid = @"";
+    projectSetting.feishu_appsecret = @"";
+    projectSetting.feishu_chatid = @"";
+    projectSetting.feishu_atuserid = @"";
     return projectSetting;
 }
 
@@ -51,6 +55,10 @@ static NSString *doubleClickWrapper = @"doubleClickWrapper";
 static NSString *maxOperationCount = @"maxOperationCount";
 static NSString *shellPath = @"shellPath";
 static NSString *searchProjectName = @"searchProjectName";
+static NSString *feishu_appid = @"feishu_appid";
+static NSString *feishu_appsecret = @"feishu_appsecret";
+static NSString *feishu_chatid = @"feishu_chatid";
+static NSString *feishu_atuserid = @"feishu_atuserid";
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
@@ -66,6 +74,10 @@ static NSString *searchProjectName = @"searchProjectName";
         _maxOperationCount = [aDecoder decodeIntegerForKey:maxOperationCount];
         _shellPath = [aDecoder decodeObjectForKey:shellPath];
         _searchProjectName = [aDecoder decodeObjectForKey:searchProjectName];
+        _feishu_appid = [aDecoder decodeObjectForKey:feishu_appid];
+        _feishu_appsecret = [aDecoder decodeObjectForKey:feishu_appsecret];
+        _feishu_chatid = [aDecoder decodeObjectForKey:feishu_chatid];
+        _feishu_atuserid = [aDecoder decodeObjectForKey:feishu_atuserid];
     }
     return self;
 }
@@ -82,6 +94,10 @@ static NSString *searchProjectName = @"searchProjectName";
     [aCoder encodeInteger:self.maxOperationCount forKey:maxOperationCount];
     [aCoder encodeObject:self.shellPath ? self.shellPath : @"" forKey:shellPath];
     [aCoder encodeObject:self.searchProjectName ? self.searchProjectName : @"" forKey:searchProjectName];
+    [aCoder encodeObject:self.feishu_appid ?: @"" forKey:feishu_appid];
+    [aCoder encodeObject:self.feishu_appsecret ?: @"" forKey:feishu_appsecret];
+    [aCoder encodeObject:self.feishu_chatid ?: @"" forKey:feishu_chatid];
+    [aCoder encodeObject:self.feishu_atuserid ?: @"" forKey:feishu_atuserid];
 }
 
 -(NSInteger)language{

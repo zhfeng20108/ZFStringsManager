@@ -32,6 +32,10 @@ NSString* const kNotifyProjectSettingChanged = @"StringManage_NotifyProjectSetti
 @property (weak) IBOutlet NSPopUpButton *searchNumberPopUpBtn;
 @property (weak) IBOutlet NSTextField *projectNameTextField;
 @property (weak) IBOutlet NSTextField *shellPathTextField;
+@property (weak) IBOutlet NSTextField *feishu_appidTextField;
+@property (weak) IBOutlet NSTextField *feishu_appsecretTextField;
+@property (weak) IBOutlet NSTextField *feishu_chatidTextField;
+@property (weak) IBOutlet NSTextField *feishu_atuseridTextField;
 
 - (IBAction)onTouchUpInsideLocalizable:(id)sender;
 - (IBAction)onTouchUpInsideExtension:(id)sender;
@@ -113,6 +117,12 @@ NSString* const kNotifyProjectSettingChanged = @"StringManage_NotifyProjectSetti
     [self.excludeTextField setSelectable:YES];
     [self.excludeTextField setEditable:NO];
     [self.excludeTextField resignFirstResponder];
+    
+    self.feishu_appidTextField.stringValue = projectSetting.feishu_appid;
+    self.feishu_appsecretTextField.stringValue = projectSetting.feishu_appsecret;
+    self.feishu_chatidTextField.stringValue = projectSetting.feishu_chatid;
+    self.feishu_atuseridTextField.stringValue = projectSetting.feishu_atuserid;
+
 }
 
 #pragma mark - NSNotification
@@ -123,7 +133,7 @@ NSString* const kNotifyProjectSettingChanged = @"StringManage_NotifyProjectSetti
             NSAlert *alert = [[NSAlert alloc]init];
             [alert setMessageText: LocalizedString(@"FileExtensionInvalid")];
             [alert addButtonWithTitle: LocalizedString(@"OK")];
-            [alert setAlertStyle:NSWarningAlertStyle];
+            [alert setAlertStyle:NSAlertStyleWarning];
             [alert runModal];
         }else{
             StringSetting* projectSetting = [self getSetting];
@@ -142,6 +152,22 @@ NSString* const kNotifyProjectSettingChanged = @"StringManage_NotifyProjectSetti
         StringSetting* projectSetting = [self getSetting];
         projectSetting.searchProjectName=self.projectNameTextField.stringValue;
         self.projectName = self.projectNameTextField.stringValue;
+    }
+    else if([notification object] == self.feishu_appidTextField){
+        StringSetting* projectSetting = [self getSetting];
+        projectSetting.feishu_appid=self.feishu_appidTextField.stringValue;
+    }
+    else if([notification object] == self.feishu_appsecretTextField){
+        StringSetting* projectSetting = [self getSetting];
+        projectSetting.feishu_appsecret=self.feishu_appsecretTextField.stringValue;
+    }
+    else if([notification object] == self.feishu_chatidTextField){
+        StringSetting* projectSetting = [self getSetting];
+        projectSetting.feishu_chatid=self.feishu_chatidTextField.stringValue;
+    }
+    else if([notification object] == self.feishu_atuseridTextField){
+        StringSetting* projectSetting = [self getSetting];
+        projectSetting.feishu_atuserid=self.feishu_atuseridTextField.stringValue;
     }
 }
 

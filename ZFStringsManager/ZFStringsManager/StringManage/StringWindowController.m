@@ -15,6 +15,7 @@
 #import "NSButton+Extension.h"
 #import "NSString+Extension.h"
 #import "StringEditViewController.h"
+#import "WarningWindowController.h"
 
 #define kStrKey @"key"
 #define kRemove @"remove"
@@ -42,7 +43,6 @@
 @property (weak) IBOutlet NSButton *errorBtn;
 @property (weak) IBOutlet NSTextField *toastLabel;
 @property (weak) IBOutlet NSView *hud;
-@property (weak) IBOutlet NSTextField *descLabel;
 @property (weak) IBOutlet NSPopUpButton *tableBtn;
 @property (weak) IBOutlet NSProgressIndicator *syncIndicator;
 
@@ -64,6 +64,8 @@
 @property (nonatomic) BOOL ascending;
 @property (nonatomic, strong) NSMutableDictionary *columnTitleDict;
 @property (nonatomic, strong) StringModel *hansModel;
+@property (nonatomic, strong) NSTimer *checkTimer;
+@property (nonatomic, strong) WarningWindowController *warningWindowCtrl;
 
 - (IBAction)addAction:(id)sender;
 - (IBAction)saveAction:(id)sender;
@@ -115,12 +117,6 @@
     self.tableview.doubleAction = @selector(doubleAction:);//双击撤销修改
     [self.window makeFirstResponder:self.tableview];
     
-    NSArray *array = @[LocalizedString(@"kkkkkkk"),
-                       LocalizedString(@"whatisyourname"),
-                       LocalizedString(@"whatareyoudoing"),
-                       LocalizedString(@"meeee"),
-                       LocalizedString(@"goodidea")];
-    
     [self.showOnlyBtn setTitle:LocalizedString(@"OnlyShowModified")];
     [self.untranslatedBtn setTitle:LocalizedString(@"Untranslated")];
     [self.unusedBtn setTitle:LocalizedString(@"Unused")];
@@ -132,7 +128,6 @@
     [self.CheckBtn setTitle:LocalizedString(@"Check")];
     [self.tipsLabel setStringValue:LocalizedString(@"UseTips")];
     [self.addBtn setTitle:LocalizedString(@"Add")];
-    [self.descLabel setStringValue:[NSString stringWithFormat:LocalizedString(@"Save and Sync desc"),LocalizedString(@"Save and Sync")]];
     
     //读取所有的表
     StringSetting *setting = [StringModel projectSettingByProjectPath:self.projectPath projectName:self.projectName];
@@ -290,7 +285,7 @@
         NSAlert *alert = [[NSAlert alloc]init];
         [alert setMessageText: LocalizedString(@"InputIsExist")];
         [alert addButtonWithTitle: LocalizedString(@"OK")];
-        [alert setAlertStyle:NSWarningAlertStyle];
+        [alert setAlertStyle:NSAlertStyleInformational];
         [alert beginSheetModalForWindow:self.window completionHandler:nil];
         return NO;
     }
@@ -328,9 +323,84 @@
     [self searchAnswer:nil];
 }
 
+- (void)_sendFeishumsg:(NSString *)errorStr type:(int)type {
+    NSString *title = @"";
+    if (type == 0) {
+        title = @"👏干得漂亮👍多语言没有错误";
+    } else if (type == 1) {
+        title = @"‼️多语言警告‼️--未翻译的";
+    } else if (type == 2) {
+        title = @"‼️多语言警告‼️--参数出错的";
+    }
+    //准备发送httprequest
+    NSString *urlString = @"https://open.feishu.cn/open-apis/auth/v3/app_access_token/internal/";
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    [request setURL:[NSURL URLWithString:urlString]];
+    [request setHTTPMethod:@"POST"];
+    //设置http头
+    NSString *contentType = [NSString stringWithFormat:@"application/json"];
+    [request addValue:contentType forHTTPHeaderField: @"Content-Type"];
+     
+    StringSetting *setting = [StringModel projectSettingByProjectPath:self.projectPath projectName:self.projectName];
+
+    //创建http内容
+    NSString *app_id = setting.feishu_appid;
+    NSString *app_secret = setting.feishu_appsecret;
+    NSDictionary *bodyDic = @{@"app_id":app_id,@"app_secret":app_secret};
+    NSData *postBody = [NSJSONSerialization dataWithJSONObject:bodyDic options:0 error:NULL];
+    //设置发送内容
+    [request setHTTPBody:postBody];
+     
+    //获取响应
+    NSURLSession *urlSession = [NSURLSession sharedSession];
+    NSURLSessionDataTask *dataTask =
+    [urlSession dataTaskWithRequest:request completionHandler:^(NSData * _Nullable responseData, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        //获取返回的内容
+        if (!error)
+        {
+            NSString *result = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
+            NSLog(@"Response: %@", result);
+            NSDictionary *resultDic = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:NULL];
+            NSString *app_access_token = resultDic[@"app_access_token"];
+            //准备发送httprequest
+            NSString *urlString = @"https://open.feishu.cn/open-apis/message/v4/send/";
+            NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+            [request setURL:[NSURL URLWithString:urlString]];
+            [request setHTTPMethod:@"POST"];
+            //设置http头
+            NSString *contentType = [NSString stringWithFormat:@"application/json"];
+            [request addValue:contentType forHTTPHeaderField: @"Content-Type"];
+            [request addValue:[NSString stringWithFormat:@"Bearer %@",app_access_token] forHTTPHeaderField:@"Authorization"];
+             
+            //创建http内容
+            NSString *chat_id = setting.feishu_chatid;
+            NSString *user_id = setting.feishu_atuserid;
+            NSDictionary *bodyDic = @{@"msg_type":@"post",@"chat_id":chat_id,@"content":@{@"post":@{@"zh_cn":@{@"title":title,@"content":@[@[@{@"tag":@"at",@"user_id":user_id}],@[@{@"tag":@"text",@"text":errorStr}]]}}}};
+            NSData *postBody = [NSJSONSerialization dataWithJSONObject:bodyDic options:0 error:NULL];
+            //设置发送内容
+            [request setHTTPBody:postBody];
+             
+            //获取响应
+            NSURLSessionDataTask *dataTask =
+            [urlSession dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+                if (!error)
+                {
+                    NSLog(@"飞书消息发送成功");
+                } else {
+                    NSLog(@"飞书消息发送失败");
+                }
+            }];
+            [dataTask resume];
+        } else {
+            NSLog(@"飞书消息发送失败");
+        }
+    }];
+    [dataTask resume];
+}
+
 #pragma mark - Button Action
 - (IBAction)openAbout:(id)sender {
-    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"https://github.com/Loongwoo/StringManage"]];
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"https://github.com/zhfeng20108/ZFStringsManager"]];
 }
 
 - (IBAction)showPreferencesPanel:(id)sender {
@@ -367,6 +437,8 @@
     } else {
         [self.tableBtn selectItemWithTitle:[setting.searchTableName stringByDeletingPathExtension]];
     }
+    __block NSMutableArray *stringArray = [[NSMutableArray alloc] init];
+    __block NSMutableArray *keyArray = [[NSMutableArray alloc] init];
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         NSArray *lprojDirectorys = [StringModel lprojDirectoriesWithProjectSetting:setting project:self.projectPath];
         if (lprojDirectorys.count == 0) {
@@ -374,21 +446,17 @@
                 NSAlert *alert = [[NSAlert alloc]init];
                 [alert setMessageText: LocalizedString(@"NoLocalizedFiles")];
                 [alert addButtonWithTitle: LocalizedString(@"OK")];
-                [alert setAlertStyle:NSWarningAlertStyle];
+                [alert setAlertStyle:NSAlertStyleInformational];
                 [alert beginSheetModalForWindow:self.window completionHandler:^(NSModalResponse returnCode) {
                     self.isRefreshing = NO;
                 }];
             });
         } else {
-            [self.stringArray removeAllObjects];
-            [self.keyArray removeAllObjects];
-            [self.keyDict removeAllObjects];
-            
             NSMutableSet *keySet = [NSMutableSet set];
             for (NSString *path in lprojDirectorys) {
                 StringModel *model = [[StringModel alloc]initWithPath:path projectSetting:setting];
                 if (model) {
-                    [self.stringArray addObject:model];
+                    [stringArray addObject:model];
                     NSSet *set = [NSSet setWithArray:model.stringDictionary.allKeys];
                     [keySet unionSet:set];
                 }
@@ -396,9 +464,12 @@
             
             NSArray *tmp = [[NSArray alloc]initWithArray:keySet.allObjects];
             NSArray *sortedArray = [tmp sortedArrayUsingSelector:@selector(compare:)];
-            [self.keyArray addObjectsFromArray:sortedArray];
+            [keyArray addObjectsFromArray:sortedArray];
             self.hansModel = [self findStringModelWithIdentifier:@"zh-Hans"];
             dispatch_async(dispatch_get_main_queue(), ^{
+                self.stringArray = stringArray;
+                self.keyArray = keyArray;
+                [self.keyDict removeAllObjects];
                 [self refreshTableView];
                 self.isRefreshing = NO;
             });
@@ -406,17 +477,133 @@
     });
 }
 
+- (IBAction)warner:(id)sender {
+    if (!self.checkTimer) {
+        self.checkTimer = [NSTimer timerWithTimeInterval:5400 target:self selector:@selector(timerAction) userInfo:nil repeats:YES];
+        [[NSRunLoop currentRunLoop] addTimer:self.checkTimer forMode:NSDefaultRunLoopMode];
+    } else {
+        [self.checkTimer invalidate];
+        self.checkTimer = nil;
+    }
+}
+
+- (void)timerAction {
+    static BOOL flag = YES;
+    if (flag) {
+        flag = NO;
+        [self saveSyncAction:self.saveSyncBtn];
+        return;
+    }
+    flag = YES;
+    [self checkError];
+}
+
+- (void)checkError {
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        self.hansModel = [self findStringModelWithIdentifier:@"zh-Hans"];
+        NSSet *keys = [NSSet setWithArray:[self.infoDict allKeys]];
+        NSMutableSet *set1 = [[NSMutableSet alloc] initWithArray:self.keyArray];
+        [set1 unionSet:keys];
+        
+        NSMutableArray *tmp2 = [NSMutableArray array];
+        [tmp2 addObjectsFromArray:[set1 allObjects]];
+        NSMutableString *errorStr = [[NSMutableString alloc] init];
+        NSMutableString *errorParamsStr = [[NSMutableString alloc] init];
+        NSArray *paramArray = @[@"%@",@"%1$@",@"%2$@",@"%3$@",@"%4$@",@"%5$@",
+                                @"%d",@"%1$d",@"%2$d",@"%3$d",@"%4$d",@"%5$d",
+                                @"%ld",@"%1$ld",@"%2$ld",@"%3$ld",@"%4$ld",@"%5$ld",
+                                @"%lld",@"%1$lld",@"%2$lld",@"%3$lld",@"%4$lld",@"%5$lld",
+                                @"%zd",@"%1$zd",@"%2$zd",@"%3$zd",@"%4$zd",@"%5$zd",@"%.0f"];
+        NSArray *pArr = @[@"%@",@"%d",@"%ld",@"%lld",@"%zd"];
+        for (NSString *string in [tmp2 copy]) {
+            NSString *hasValue = self.hansModel.stringDictionary[string];
+            for (StringModel *model in self.stringArray) {
+                NSString *str2 = model.stringDictionary[string];
+                if (str2.length == 0) {
+                    [errorStr appendFormat:@"行号：%lu     语言：%@  key:%@\n",[self.hansModel.keyArray indexOfObject:string]+2,model.identifier,string];
+                } else {
+                    BOOL existError = NO;
+                    NSString *errorParam = nil;
+                    if ([str2 isEqualToString:@"#N/A"]) {
+                        existError = YES;
+                        errorParam = str2;
+                    } else {
+                        NSArray *pArray = pArr;
+                        for (NSString *p in pArray) {
+                            if ([str2 componentsSeparatedByString:p].count > 2) {
+                                existError = YES;
+                                errorParam = p;
+                                break;
+                            }
+                        }
+                        if (!existError) {
+                            for (int i=0; i<paramArray.count; ++i) {
+                                NSString *p = paramArray[i];
+                                //检查参数个数是否一致
+                                NSUInteger n1 = [hasValue componentsSeparatedByString:p].count;
+                                NSUInteger n2 = [str2 componentsSeparatedByString:p].count;
+                                if (n1 != n2) {
+                                    existError = YES;
+                                    errorParam = p;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    if (existError) {
+                        [errorParamsStr appendFormat:@"行号：%lu     语言：%@  错误参数:%@        key:%@\n",[self.hansModel.keyArray indexOfObject:string]+2,model.identifier,errorParam,string];
+                    }
+                }
+            }
+        }
+        if (errorStr.length > 0 || errorParamsStr.length > 0) {
+            NSLog(@"报警：%@\n\n%@",errorStr,errorParamsStr);
+            if (errorStr.length > 0) {
+                //发送飞书消息
+                [self _sendFeishumsg:errorStr type:1];
+            }
+            if (errorParamsStr.length > 0) {
+                [self _sendFeishumsg:errorParamsStr type:2];
+            }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (self.warningWindowCtrl) {
+                    [self.warningWindowCtrl.window close];
+                }
+                WarningWindowController *ctrl = [[WarningWindowController alloc] initWithWindowNibName:@"WarningWindowController"];
+                [ctrl refreshText:[NSString stringWithFormat:@"未翻译的如下：\n%@\n\n参数出错的如下：\n%@",errorStr,errorParamsStr]];
+                ctrl.window.level = kCGAssistiveTechHighWindowLevel;
+                [ctrl.window orderFrontRegardless];
+                [ctrl showWindow:self];
+                [ctrl.window makeKeyWindow];
+                self.warningWindowCtrl = ctrl;
+            });
+        } else {
+            //发送飞书消息
+            [self _sendFeishumsg:errorStr type:0];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (self.warningWindowCtrl) {
+                    [self.warningWindowCtrl.window close];
+                }
+            });
+        }
+    });
+}
+
 - (IBAction)searchAnswer:(id)sender {
+    NSString *searchString = _searchField.stringValue;
+    NSControlStateValue showOnlyBtnState = self.showOnlyBtn.state;
+    NSControlStateValue unusedBtnState = self.unusedBtn.state;
+    NSControlStateValue untranslatedBtnState = self.untranslatedBtn.state;
+    NSControlStateValue errorBtnState = self.errorBtn.state;
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         
         NSSet *keys = [NSSet setWithArray:[self.infoDict allKeys]];
-        NSMutableSet *set1 = [[NSMutableSet alloc] initWithArray:_keyArray];
+        NSMutableSet *set1 = [[NSMutableSet alloc] initWithArray:self.keyArray];
         [set1 unionSet:keys];
         
-        NSString *searchString = _searchField.stringValue;
         NSMutableArray *tmp2 = [NSMutableArray array];
-        if(self.showOnlyBtn.state){
-            for (ActionModel *model in _actionArray) {
+        if(showOnlyBtnState){
+            for (ActionModel *model in self.actionArray) {
                 if (![tmp2 containsObject:model.key]) {
                     [tmp2 addObject:model.key];
                 }
@@ -426,7 +613,7 @@
         }
         
         for (NSString *string in [tmp2 copy]) {
-            if(self.unusedBtn.state){
+            if(unusedBtnState){
                 NSArray *arr = self.infoDict[string];
                 if (arr.count > 0) {
                     [tmp2 removeObject:string];
@@ -435,42 +622,34 @@
             
             BOOL exist = YES;
             BOOL found = searchString.length==0 || [string contain:searchString];
-            for (StringModel *model in _stringArray) {
+            for (StringModel *model in self.stringArray) {
                 NSString *str2 = model.stringDictionary[string];
                 ActionModel *action = [self findActionWith:string identify:model.identifier];
                 exist = exist && (str2.length || (action && action.value.length));
                 found = found || ([str2 contain:searchString] || (action && [action.value contain:searchString]));
             }
-            if (!found || (found && self.untranslatedBtn.state && exist)) {
+            if (!found || (found && untranslatedBtnState && exist)) {
                 [tmp2 removeObject:string];
             }
         }
         
-        if (self.errorBtn.state) {
+        if (errorBtnState) {
             NSArray *paramArray = @[@"%@",@"%1$@",@"%2$@",@"%3$@",@"%4$@",@"%5$@",
                                     @"%d",@"%1$d",@"%2$d",@"%3$d",@"%4$d",@"%5$d",
                                     @"%ld",@"%1$ld",@"%2$ld",@"%3$ld",@"%4$ld",@"%5$ld",
                                     @"%lld",@"%1$lld",@"%2$lld",@"%3$lld",@"%4$lld",@"%5$lld",
                                     @"%zd",@"%1$zd",@"%2$zd",@"%3$zd",@"%4$zd",@"%5$zd",@"%.0f"];
-//            NSArray *arParamArray = @[@"@%",@"@$1%",@"@$2%",@"@$3%",@"@$4%",@"@$5%",
-//            @"d%",@"d$1%",@"d$2%",@"d$3%",@"d$4%",@"d$5%",
-//            @"ld%",@"ld$1%",@"ld$2%",@"ld$3%",@"ld$4%",@"ld$5%",
-//            @"lld%",@"lld$1%",@"lld$2%",@"lld$3%",@"lld$4%",@"lld$5%",
-//            @"zd%",@"zd$1%",@"zd$2%",@"zd$3%",@"zd$4%",@"%zd$5%",@"%.0f"];
             NSArray *pArr = @[@"%@",@"%d",@"%ld",@"%lld",@"%zd"];
-            
-            NSArray *arPArr = @[@"@%",@"d%",@"ld%",@"lld%",@"zd%"];
             for (NSString *string in [tmp2 copy]) {
                 NSString *hasValue = self.hansModel.stringDictionary[string];
                 BOOL keyExistError = NO;
-                for (StringModel *model in _stringArray) {
+                for (StringModel *model in self.stringArray) {
                     BOOL existError = NO;
-                    BOOL isAr = [model.identifier isEqualToString:@"ar"];
                     NSString *str2 = model.stringDictionary[string];
                     if ([str2 isEqualToString:@"#N/A"]) {
                         existError = YES;
                     } else {
-                        NSArray *pArray = isAr ? arPArr: pArr;
+                        NSArray *pArray = pArr;
                         for (NSString *p in pArray) {
                             if ([str2 componentsSeparatedByString:p].count > 2) {
                                 existError = YES;
@@ -502,24 +681,24 @@
         }
         
         
-        if ([kStrKey isEqualToString:_sortingCol] || [kRemove isEqualToString:_sortingCol]){
+        if ([kStrKey isEqualToString:self.sortingCol] || [kRemove isEqualToString:self.sortingCol]){
             self.showArray = [tmp2 sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
-                NSString *key1 = _ascending?obj1:obj2;
-                NSString *key2 = _ascending?obj2:obj1;
+                NSString *key1 = self.ascending?obj1:obj2;
+                NSString *key2 = self.ascending?obj2:obj1;
                 
                 return [key1 compare:key2];
             }];
-        } else if ([kRowNo isEqualToString:_sortingCol] ){
+        } else if ([kRowNo isEqualToString:self.sortingCol] ){
             self.showArray = [tmp2 sortedArrayUsingComparator:^NSComparisonResult(NSString * _Nonnull key1, NSString * _Nonnull key2) {
                 NSUInteger index1 = [self.hansModel.keyArray indexOfObject:key1];
                 NSUInteger index2 = [self.hansModel.keyArray indexOfObject:key2];
-                return  _ascending?index1>index2:index1<index2;
+                return  self.ascending?index1>index2:index1<index2;
             }];
-        }  else if ([kInfo isEqualToString:_sortingCol]){
+        }  else if ([kInfo isEqualToString:self.sortingCol]){
             self.showArray = [tmp2 sortedArrayUsingComparator:^NSComparisonResult(NSString * _Nonnull key1, NSString * _Nonnull key2) {
-                NSArray *items1 = self.infoDict[_ascending?key1:key2];
+                NSArray *items1 = self.infoDict[self.ascending?key1:key2];
                 NSInteger count1 = items1.count;
-                NSArray *items2 = self.infoDict[_ascending?key2:key1];
+                NSArray *items2 = self.infoDict[self.ascending?key2:key1];
                 NSInteger count2 = items2.count;
                 if (count1 > count2) {
                     return NSOrderedDescending;
@@ -531,15 +710,15 @@
             }];
         } else {
             self.showArray = [tmp2 sortedArrayUsingComparator:^NSComparisonResult(NSString * _Nonnull key1, NSString * _Nonnull key2) {
-                NSString *rawValue1 = [self valueInRaw:_ascending?key1:key2 identifier:_sortingCol];
-                NSString *rawValue2 = [self valueInRaw:_ascending?key2:key1 identifier:_sortingCol];
+                NSString *rawValue1 = [self valueInRaw:self.ascending?key1:key2 identifier:self.sortingCol];
+                NSString *rawValue2 = [self valueInRaw:self.ascending?key2:key1 identifier:self.sortingCol];
                 return [rawValue1 compare:rawValue2];
             }];
         }
         dispatch_async(dispatch_get_main_queue(), ^{
             
             self.recordLabel.stringValue = [NSString stringWithFormat:LocalizedString(@"RecordNumMsg"),self.showArray.count];
-            [self.saveBtn setEnabled:(_actionArray.count>0 && !self.isChecking)];
+            [self.saveBtn setEnabled:(self.actionArray.count>0 && !self.isChecking)];
             [self.tableview reloadData];
         });
         
@@ -580,28 +759,28 @@
     [alert addButtonWithTitle:LocalizedString(@"Cancel")];
     NSTextField *input = [[NSTextField alloc] initWithFrame:NSMakeRect(0, 0, 200, 24)];
     [alert setAccessoryView:input];
-    [alert setAlertStyle:NSInformationalAlertStyle];
+    [alert setAlertStyle:NSAlertStyleInformational];
     [alert beginSheetModalForWindow:self.window completionHandler:^(NSModalResponse returnCode) {
         if(returnCode == NSAlertFirstButtonReturn) {
             NSString *text = [input.stringValue stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
             if(![self validateKey:text])
                 return;
-            [_keyArray addObject:text];
-            [_keyDict setObject:@(KeyTypeAdd) forKey:text];
+            [self.keyArray addObject:text];
+            [self.keyDict setObject:@(KeyTypeAdd) forKey:text];
             
-            for (StringModel *model in _stringArray) {
+            for (StringModel *model in self.stringArray) {
                 ActionModel *action = [[ActionModel alloc]init];
                 action.actionType = ActionTypeAdd;
                 action.identifier = model.identifier;
                 action.key = text;
                 action.value = @"";
-                [_actionArray addObject:action];
+                [self.actionArray addObject:action];
             }
             
             [self.searchField setStringValue:@""];
             [self searchAnswer:nil];
             
-            [_tableview scrollRowToVisible:[_showArray indexOfObject:text]];
+            [self.tableview scrollRowToVisible:[self.showArray indexOfObject:text]];
         }
     }];
 }
@@ -621,21 +800,16 @@
 }
 
 - (IBAction)saveSyncAction:(id)sender {
-    //保存到本地
-    [self saveAction:nil];
-    
     StringSetting *setting = [StringModel projectSettingByProjectPath:self.projectPath projectName:self.projectName];
     if (![[NSFileManager defaultManager] fileExistsAtPath:setting.shellPath]) {
         NSAlert *alert = [[NSAlert alloc]init];
         [alert setMessageText:setting.shellPath.length>0 ? [NSString stringWithFormat:@"脚本文件\"%@\"不存在",setting.shellPath] : @"请配置shell脚本文件路径"];
         [alert addButtonWithTitle: LocalizedString(@"OK")];
-        [alert setAlertStyle:NSWarningAlertStyle];
+        [alert setAlertStyle:NSAlertStyleWarning];
         [alert runModal];
         return;
     }
-    NSString* shellPath = [[[StringModel settingFilePathByProjectName:@""] stringByDeletingLastPathComponent] stringByAppendingPathComponent:@"update.sh"];
-    //写最新脚本到本地
-    [[@"source " stringByAppendingString:setting.shellPath] writeToFile:shellPath atomically:YES encoding:NSUTF8StringEncoding error:NULL];
+    NSString* shellPath = setting.shellPath;
     //跑脚本
     if(shellPath.length==0){
         return;
@@ -646,14 +820,26 @@
     [self.syncIndicator startAnimation:nil];
     NSTask* task = [[NSTask alloc] init];
     [task setLaunchPath:@"/bin/bash"];
-    [task setArguments:@[shellPath]];
-    [task launch];
-    task.terminationHandler = ^(NSTask *t){
-        self.hud.hidden = YES;
-        [self.syncIndicator stopAnimation:nil];
-        self.syncIndicator.hidden = YES;
-        NSLog(@"saveSyncAction..... %zd",t.terminationStatus);
-    };
+    [task setArguments:@[shellPath,@"macapp"]];
+    // 新建输出管道作为Task的输出
+    NSPipe *pipe = [NSPipe pipe];
+    [task setStandardOutput: pipe];
+    NSFileHandle *file = [pipe fileHandleForReading];
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        [task launchAndReturnError:NULL];
+        task.terminationHandler = ^(NSTask *t){
+            dispatch_async(dispatch_get_main_queue(), ^{
+                self.hud.hidden = YES;
+                [self.syncIndicator stopAnimation:nil];
+                self.syncIndicator.hidden = YES;
+                [self refresh:nil];
+            });
+        };
+        // 获取运行结果
+        NSData *data = [file readDataToEndOfFile];
+        NSString *string = [[NSString alloc] initWithData:data encoding: NSUTF8StringEncoding];
+        NSLog(@"结果： %@",string);
+    });
 }
 
 -(void)cellClicked:(id)sender {
@@ -676,11 +862,13 @@
             if(model){
                 NSString *identifier = model.identifier;
                 if (self.infoPopOver && self.infoPopOver.isShown) {
-                    [self.infoPopOver close],self.infoPopOver = nil;
+                    [self.infoPopOver close];
+                    self.infoPopOver = nil;
                 }
                 if (self.editPopOver && self.editPopOver.isShown) {
                     StringEditViewController *editVC = (StringEditViewController*)[self.editPopOver contentViewController];
-                    [self.editPopOver close],self.editPopOver = nil;
+                    [self.editPopOver close];
+                    self.editPopOver = nil;
                     if ([key isEqualToString:editVC.key] && [identifier isEqualToString:editVC.identifier]) {
                         return;
                     }
@@ -836,11 +1024,13 @@
     NSString *key=button.identifier;
     if(self.infoDict && key.length>0){
         if (self.editPopOver && self.editPopOver.isShown) {
-            [self.editPopOver close],self.editPopOver = nil;
+            [self.editPopOver close];
+            self.editPopOver = nil;
         }
         if (self.infoPopOver && self.infoPopOver.isShown) {
             StringInfoViewController *infoVC = (StringInfoViewController*)[self.infoPopOver contentViewController];
-            [self.infoPopOver close], self.infoPopOver = nil;
+            [self.infoPopOver close];
+            self.infoPopOver = nil;
             if ([key isEqualToString:infoVC.key]) {
                 return;
             }
