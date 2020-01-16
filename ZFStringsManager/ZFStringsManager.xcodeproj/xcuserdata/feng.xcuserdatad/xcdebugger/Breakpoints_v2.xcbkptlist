@@ -35,8 +35,8 @@
             timestampString = "496303358.874963"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "655"
-            endingLineNumber = "655"
+            startingLineNumber = "652"
+            endingLineNumber = "652"
             landmarkName = "+lprojDirectoriesWithProjectSetting:project:"
             landmarkType = "7">
          </BreakpointContent>
@@ -67,8 +67,8 @@
             filePath = "ZFStringsManager/StringManage/StringModel.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "626"
-            endingLineNumber = "626"
+            startingLineNumber = "623"
+            endingLineNumber = "623"
             landmarkName = "+openItem:"
             landmarkType = "7">
          </BreakpointContent>
@@ -115,8 +115,8 @@
             filePath = "ZFStringsManager/StringManage/StringWindowController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1141"
-            endingLineNumber = "1141"
+            startingLineNumber = "1158"
+            endingLineNumber = "1158"
             landmarkName = "-tableView:viewForTableColumn:row:"
             landmarkType = "7">
          </BreakpointContent>
@@ -131,8 +131,8 @@
             filePath = "ZFStringsManager/StringManage/StringWindowController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1143"
-            endingLineNumber = "1143"
+            startingLineNumber = "1160"
+            endingLineNumber = "1160"
             landmarkName = "-tableView:viewForTableColumn:row:"
             landmarkType = "7">
          </BreakpointContent>
@@ -147,8 +147,8 @@
             filePath = "ZFStringsManager/StringManage/StringWindowController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "423"
-            endingLineNumber = "423"
+            startingLineNumber = "425"
+            endingLineNumber = "425"
             landmarkName = "-refresh:"
             landmarkType = "7">
          </BreakpointContent>
@@ -163,8 +163,8 @@
             filePath = "ZFStringsManager/StringManage/StringWindowController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "444"
-            endingLineNumber = "444"
+            startingLineNumber = "446"
+            endingLineNumber = "446"
             landmarkName = "-refresh:"
             landmarkType = "7">
          </BreakpointContent>
@@ -179,8 +179,8 @@
             filePath = "ZFStringsManager/StringManage/StringWindowController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "455"
-            endingLineNumber = "455"
+            startingLineNumber = "457"
+            endingLineNumber = "457"
             landmarkName = "-refresh:"
             landmarkType = "7">
          </BreakpointContent>
@@ -189,15 +189,15 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "C6252BEE-65DB-4867-8CF5-FBB97C539856"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             condition = "[str isEqualToString:@&quot;NSLocalizedString(@\&quot;I couldn&apos;t help giving my first gift to the host\&quot;&quot;]"
             continueAfterRunningActions = "No"
             filePath = "ZFStringsManager/StringManage/StringModel.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "440"
-            endingLineNumber = "440"
+            startingLineNumber = "437"
+            endingLineNumber = "437"
             landmarkName = "+findItemsWithProjectSetting:projectPath:includeDirs:excludeDirs:fileTypes:tempFilePath:findStrings:block:"
             landmarkType = "7">
          </BreakpointContent>
@@ -212,8 +212,8 @@
             filePath = "ZFStringsManager/StringManage/StringModel.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "445"
-            endingLineNumber = "445"
+            startingLineNumber = "442"
+            endingLineNumber = "442"
             landmarkName = "+findItemsWithProjectSetting:projectPath:includeDirs:excludeDirs:fileTypes:tempFilePath:findStrings:block:"
             landmarkType = "7">
          </BreakpointContent>
@@ -228,8 +228,8 @@
             filePath = "ZFStringsManager/StringManage/StringModel.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "444"
-            endingLineNumber = "444"
+            startingLineNumber = "441"
+            endingLineNumber = "441"
             landmarkName = "+findItemsWithProjectSetting:projectPath:includeDirs:excludeDirs:fileTypes:tempFilePath:findStrings:block:"
             landmarkType = "7">
          </BreakpointContent>
@@ -244,8 +244,8 @@
             filePath = "ZFStringsManager/StringManage/StringWindowController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "602"
-            endingLineNumber = "602"
+            startingLineNumber = "604"
+            endingLineNumber = "604"
             landmarkName = "-searchAnswer:"
             landmarkType = "7">
          </BreakpointContent>
@@ -260,8 +260,8 @@
             filePath = "ZFStringsManager/StringManage/StringWindowController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "461"
-            endingLineNumber = "461"
+            startingLineNumber = "463"
+            endingLineNumber = "463"
             landmarkName = "-refresh:"
             landmarkType = "7">
          </BreakpointContent>
@@ -276,8 +276,8 @@
             filePath = "ZFStringsManager/StringManage/StringWindowController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "467"
-            endingLineNumber = "467"
+            startingLineNumber = "469"
+            endingLineNumber = "469"
             landmarkName = "-refresh:"
             landmarkType = "7">
          </BreakpointContent>
@@ -309,8 +309,8 @@
             filePath = "ZFStringsManager/StringManage/StringModel.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "442"
-            endingLineNumber = "442"
+            startingLineNumber = "439"
+            endingLineNumber = "439"
             landmarkName = "+findItemsWithProjectSetting:projectPath:includeDirs:excludeDirs:fileTypes:tempFilePath:findStrings:block:"
             landmarkType = "7">
          </BreakpointContent>
@@ -319,7 +319,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "C2C200D7-E0FF-4584-9954-D0779A916DB2"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZFStringsManager/StringManage/StringModel.m"
@@ -341,10 +341,58 @@
             filePath = "ZFStringsManager/StringManage/StringModel.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "443"
-            endingLineNumber = "443"
+            startingLineNumber = "440"
+            endingLineNumber = "440"
             landmarkName = "+findItemsWithProjectSetting:projectPath:includeDirs:excludeDirs:fileTypes:tempFilePath:findStrings:block:"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A06FA179-23BA-4A3D-9A31-6AF0538F5972"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ZFStringsManager/StringManage/StringWindowController.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "751"
+            endingLineNumber = "751"
+            landmarkName = "-checkAction:"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "A06FA179-23BA-4A3D-9A31-6AF0538F5972 - a24922f3053455e3"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__38-[StringWindowController checkAction:]_block_invoke"
+                  moduleName = "ZFStringsManager"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/feng/ZFStringsManager/ZFStringsManager/ZFStringsManager/StringManage/StringWindowController.m"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "748"
+                  endingLineNumber = "748"
+                  offsetFromSymbolStart = "834">
+               </Location>
+               <Location
+                  uuid = "A06FA179-23BA-4A3D-9A31-6AF0538F5972 - a24922f3053455e3"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__38-[StringWindowController checkAction:]_block_invoke"
+                  moduleName = "ZFStringsManager"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/feng/ZFStringsManager/ZFStringsManager/ZFStringsManager/StringManage/StringWindowController.m"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "748"
+                  endingLineNumber = "748"
+                  offsetFromSymbolStart = "872">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

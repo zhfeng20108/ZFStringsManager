@@ -331,6 +331,8 @@
         title = @"‼️多语言警告‼️--未翻译的";
     } else if (type == 2) {
         title = @"‼️多语言警告‼️--参数出错的";
+    } else if (type == 3) {
+        title = @"‼️多语言警告‼️--未使用的需要移走";
     }
     //准备发送httprequest
     NSString *urlString = @"https://open.feishu.cn/open-apis/auth/v3/app_access_token/internal/";
@@ -744,6 +746,21 @@
                 weakSelf.checkIndicator.doubleValue = progress;
             });
         }];
+        NSMutableString *errorStr = [[NSMutableString alloc] init];
+        NSUInteger count = 0;
+        for (NSInteger i=0; i<self.hansModel.keyArray.count; ++i) {
+            NSString *key = self.hansModel.keyArray[i];
+            NSArray *items = dict[key];
+            if (items.count == 0) {
+                [errorStr appendFormat:@"行号：%lu     key:%@\n",i+2,key];
+                ++count;
+            }
+        }
+        if (errorStr.length > 0) {
+            [errorStr insertString:[NSString stringWithFormat:@"共计 %lu 条不再使用\n",(unsigned long)count] atIndex:0];
+            NSLog(@"%@",errorStr);
+            [self _sendFeishumsg:errorStr type:3];
+        }
         dispatch_async(dispatch_get_main_queue(), ^{
             weakSelf.isChecking=NO;
             [weakSelf.infoDict addEntriesFromDictionary:dict];
