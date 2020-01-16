@@ -465,9 +465,9 @@
             NSArray *tmp = [[NSArray alloc]initWithArray:keySet.allObjects];
             NSArray *sortedArray = [tmp sortedArrayUsingSelector:@selector(compare:)];
             [keyArray addObjectsFromArray:sortedArray];
-            self.hansModel = [self findStringModelWithIdentifier:@"zh-Hans"];
             dispatch_async(dispatch_get_main_queue(), ^{
                 self.stringArray = stringArray;
+                self.hansModel = [self findStringModelWithIdentifier:@"zh-Hans"];
                 self.keyArray = keyArray;
                 [self.keyDict removeAllObjects];
                 [self refreshTableView];

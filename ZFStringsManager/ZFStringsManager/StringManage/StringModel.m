@@ -50,7 +50,10 @@ static NSString * const kSuffixRegularExpressionPattern = @"(.*)\";$";
                 keyRange = [result rangeAtIndex:2];
                 if (keyRange.location == NSNotFound)
                     keyRange = [result rangeAtIndex:3];
-                
+                if (keyRange.location == 0) {//不知为啥个别key包含了双引号
+                    keyRange.location = 1;
+                    keyRange.length = keyRange.length -= 2;
+                }
                 valueRange = [result rangeAtIndex:4];
                 
                 key = [line substringWithRange:keyRange];
@@ -414,7 +417,7 @@ typedef void (^OnFindedItem)(NSString* fullPath, BOOL isDirectory, BOOL* skipThi
         return nil;
     }
     
-    NSString *regPattern = [NSString stringWithFormat:@"%@\\(@?\".{0,}\"",warpperArr[0]];
+    NSString *regPattern = @"@\".*?\"";
     NSRegularExpression *regularExpression = [NSRegularExpression regularExpressionWithPattern:regPattern options:0 error:nil];
     
     __block NSMutableDictionary *dict = [NSMutableDictionary dictionary];
@@ -430,11 +433,11 @@ typedef void (^OnFindedItem)(NSString* fullPath, BOOL isDirectory, BOOL* skipThi
                     if (result.range.location != NSNotFound) {
                         NSRange valueRange = [result rangeAtIndex:0];
                         if(valueRange.location != NSNotFound){
-                            NSString *value = [line substringWithRange:valueRange];
-                            NSArray *arr = [findStrings filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(NSString*  _Nullable evaluatedObject, NSDictionary<NSString *,id> * _Nullable bindings) {
-                                return [value contain:[NSString stringWithFormat:@"\"%@\"",evaluatedObject]];
-                            }]];
-                            for (NSString *value in arr) {
+                            NSString *str = [line substringWithRange:valueRange];
+                            for (NSString *value in findStrings) {
+                                if (![str isEqualToString:[NSString stringWithFormat:@"@\"%@\"",value]]) {
+                                    continue;
+                                }
                                 StringItem *item = [[StringItem alloc]init];
                                 item.lineNumber = lineNum;
                                 item.filePath = filePath;
