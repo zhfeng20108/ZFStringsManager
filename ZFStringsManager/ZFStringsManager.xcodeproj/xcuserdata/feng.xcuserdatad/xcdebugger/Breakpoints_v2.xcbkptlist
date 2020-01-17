@@ -115,8 +115,8 @@
             filePath = "ZFStringsManager/StringManage/StringWindowController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1158"
-            endingLineNumber = "1158"
+            startingLineNumber = "1162"
+            endingLineNumber = "1162"
             landmarkName = "-tableView:viewForTableColumn:row:"
             landmarkType = "7">
          </BreakpointContent>
@@ -131,8 +131,8 @@
             filePath = "ZFStringsManager/StringManage/StringWindowController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1160"
-            endingLineNumber = "1160"
+            startingLineNumber = "1164"
+            endingLineNumber = "1164"
             landmarkName = "-tableView:viewForTableColumn:row:"
             landmarkType = "7">
          </BreakpointContent>
@@ -147,8 +147,8 @@
             filePath = "ZFStringsManager/StringManage/StringWindowController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "425"
-            endingLineNumber = "425"
+            startingLineNumber = "427"
+            endingLineNumber = "427"
             landmarkName = "-refresh:"
             landmarkType = "7">
          </BreakpointContent>
@@ -163,8 +163,8 @@
             filePath = "ZFStringsManager/StringManage/StringWindowController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "446"
-            endingLineNumber = "446"
+            startingLineNumber = "448"
+            endingLineNumber = "448"
             landmarkName = "-refresh:"
             landmarkType = "7">
          </BreakpointContent>
@@ -179,8 +179,8 @@
             filePath = "ZFStringsManager/StringManage/StringWindowController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "457"
-            endingLineNumber = "457"
+            startingLineNumber = "459"
+            endingLineNumber = "459"
             landmarkName = "-refresh:"
             landmarkType = "7">
          </BreakpointContent>
@@ -244,8 +244,8 @@
             filePath = "ZFStringsManager/StringManage/StringWindowController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "604"
-            endingLineNumber = "604"
+            startingLineNumber = "606"
+            endingLineNumber = "606"
             landmarkName = "-searchAnswer:"
             landmarkType = "7">
          </BreakpointContent>
@@ -260,8 +260,8 @@
             filePath = "ZFStringsManager/StringManage/StringWindowController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "463"
-            endingLineNumber = "463"
+            startingLineNumber = "465"
+            endingLineNumber = "465"
             landmarkName = "-refresh:"
             landmarkType = "7">
          </BreakpointContent>
@@ -276,8 +276,8 @@
             filePath = "ZFStringsManager/StringManage/StringWindowController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "469"
-            endingLineNumber = "469"
+            startingLineNumber = "471"
+            endingLineNumber = "471"
             landmarkName = "-refresh:"
             landmarkType = "7">
          </BreakpointContent>
@@ -357,8 +357,8 @@
             filePath = "ZFStringsManager/StringManage/StringWindowController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "751"
-            endingLineNumber = "751"
+            startingLineNumber = "753"
+            endingLineNumber = "753"
             landmarkName = "-checkAction:"
             landmarkType = "7">
             <Locations>

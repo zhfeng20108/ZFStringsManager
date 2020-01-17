@@ -333,6 +333,8 @@
         title = @"‼️多语言警告‼️--参数出错的";
     } else if (type == 3) {
         title = @"‼️多语言警告‼️--未使用的需要移走";
+    } else if (type == 4) {
+        title = @"👏干得漂亮👍多语言不存在多余的";
     }
     //准备发送httprequest
     NSString *urlString = @"https://open.feishu.cn/open-apis/auth/v3/app_access_token/internal/";
@@ -760,6 +762,8 @@
             [errorStr insertString:[NSString stringWithFormat:@"共计 %lu 条不再使用\n",(unsigned long)count] atIndex:0];
             NSLog(@"%@",errorStr);
             [self _sendFeishumsg:errorStr type:3];
+        } else {
+            [self _sendFeishumsg:errorStr type:4];
         }
         dispatch_async(dispatch_get_main_queue(), ^{
             weakSelf.isChecking=NO;
