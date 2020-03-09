@@ -750,12 +750,32 @@
         }];
         NSMutableString *errorStr = [[NSMutableString alloc] init];
         NSUInteger count = 0;
+        NSArray *pArr = @[@"%@",@"%d",@"%ld",@"%lld",@"%zd"];
+        NSMutableArray *specialKeyArr = [[NSMutableArray alloc] init];
         for (NSInteger i=0; i<self.hansModel.keyArray.count; ++i) {
             NSString *key = self.hansModel.keyArray[i];
             NSArray *items = dict[key];
             if (items.count == 0) {
-                [errorStr appendFormat:@"行号：%lu     key:%@\n",i+2,key];
-                ++count;
+                BOOL findSpecial = NO;
+                if (key.length > 3) {
+                    NSString *k0 = [key substringToIndex:key.length-1];
+                    NSString *k1 = [key substringFromIndex:key.length-1];
+                    if ([@"0123456789" containsString:k1]) {
+                        for (NSString *p in pArr) {
+                            NSString *specialKey = [k0 stringByAppendingString:p];
+                            NSArray *items = dict[specialKey];
+                            if (items.count > 0) {
+                                findSpecial = YES;
+                                [specialKeyArr addObject:specialKey];
+                                break;
+                            }
+                        }
+                    }
+                }
+                if (!findSpecial) {
+                    [errorStr appendFormat:@"行号：%lu     key:%@\n",i+2,key];
+                    ++count;
+                }
             }
         }
         if (errorStr.length > 0) {
@@ -765,9 +785,11 @@
         } else {
             [self _sendFeishumsg:errorStr type:4];
         }
+        NSMutableDictionary *finalDict = [NSMutableDictionary dictionaryWithDictionary:dict];
+        [finalDict removeObjectsForKeys:specialKeyArr];
         dispatch_async(dispatch_get_main_queue(), ^{
             weakSelf.isChecking=NO;
-            [weakSelf.infoDict addEntriesFromDictionary:dict];
+            [weakSelf.infoDict addEntriesFromDictionary:finalDict];
             [weakSelf searchAnswer:nil];
         });
     });

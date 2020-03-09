@@ -380,6 +380,21 @@ typedef void (^OnFindedItem)(NSString* fullPath, BOOL isDirectory, BOOL* skipThi
     
     NSString* tempFilePath = [[StringModel _tempFileDirectory] stringByAppendingPathComponent:[[NSUUID UUID] UUIDString]];
     NSSet *set = [NSSet setWithArray:projectSetting.searchTypes];
+    NSMutableArray *findStringsArray = [[NSMutableArray alloc] initWithArray:findStrings];
+    NSArray *pArr = @[@"%@",@"%d",@"%ld",@"%lld",@"%zd"];
+    NSMutableArray *addArray = [NSMutableArray array];
+    for (NSString *key in findStringsArray) {
+        if (key.length > 3) {
+            NSString *k0 = [key substringToIndex:key.length-1];
+            NSString *k1 = [key substringFromIndex:key.length-1];
+            if ([@"0123456789" containsString:k1]) {
+                for (NSString *p in pArr) {
+                    [addArray addObject:[k0 stringByAppendingString:p]];
+                }
+            }
+        }
+    }
+    [findStringsArray addObjectsFromArray:addArray];
     @try {
         return [StringModel findItemsWithProjectSetting:projectSetting
                                             projectPath:projectPath
@@ -387,7 +402,7 @@ typedef void (^OnFindedItem)(NSString* fullPath, BOOL isDirectory, BOOL* skipThi
                                             excludeDirs:[projectSetting excludeDirs]
                                               fileTypes:set
                                            tempFilePath:tempFilePath
-                                            findStrings:findStrings
+                                            findStrings:findStringsArray
                                                   block:block];
     }
     @catch (NSException* exception) {
