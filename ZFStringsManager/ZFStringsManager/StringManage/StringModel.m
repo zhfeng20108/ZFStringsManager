@@ -44,21 +44,30 @@ static NSString * const kSuffixRegularExpressionPattern = @"(.*)\";$";
             NSRange keyRange;
             NSString *value = nil;
             // Find definition
-            NSTextCheckingResult *result = [regularExpression firstMatchInString:line options:0 range:NSMakeRange(0, line.length)];
+            BOOL isValid = NO;
+            if ([line hasSuffix:@"\";"]) {
+                isValid = YES;
+            }
+            if (isValid) {
+                NSTextCheckingResult *result = [regularExpression firstMatchInString:line options:0 range:NSMakeRange(0, line.length)];
 
-            if (result.range.location != NSNotFound && result.numberOfRanges == 6) {
-                keyRange = [result rangeAtIndex:2];
-                if (keyRange.location == NSNotFound)
-                    keyRange = [result rangeAtIndex:3];
-                if (keyRange.location == 0) {//不知为啥个别key包含了双引号
-                    keyRange.location = 1;
-                    keyRange.length = keyRange.length -= 2;
+                if (result.range.location != NSNotFound && result.numberOfRanges == 6) {
+                    keyRange = [result rangeAtIndex:2];
+                    if (keyRange.location == NSNotFound)
+                        keyRange = [result rangeAtIndex:3];
+                    if (keyRange.location == 0) {//不知为啥个别key包含了双引号
+                        keyRange.location = 1;
+                        keyRange.length = keyRange.length -= 2;
+                    }
+                    valueRange = [result rangeAtIndex:4];
+                    
+                    key = [line substringWithRange:keyRange];
+                    value = [line substringWithRange:valueRange];
+                } else {
+                    isValid = NO;
                 }
-                valueRange = [result rangeAtIndex:4];
-                
-                key = [line substringWithRange:keyRange];
-                value = [line substringWithRange:valueRange];
-            } else {
+            }
+             if(!isValid) {
                 NSTextCheckingResult *result = [preRegularExpression firstMatchInString:line options:0 range:NSMakeRange(0, line.length)];
                 if (result.range.location != NSNotFound && result.numberOfRanges == 6) {
                     keyRange = [result rangeAtIndex:2];
@@ -432,7 +441,7 @@ typedef void (^OnFindedItem)(NSString* fullPath, BOOL isDirectory, BOOL* skipThi
         return nil;
     }
     
-    NSString *regPattern = @"@\".*?\"";
+    NSString *regPattern = @"\".*?\"";
     NSRegularExpression *regularExpression = [NSRegularExpression regularExpressionWithPattern:regPattern options:0 error:nil];
     
     __block NSMutableDictionary *dict = [NSMutableDictionary dictionary];
@@ -450,7 +459,7 @@ typedef void (^OnFindedItem)(NSString* fullPath, BOOL isDirectory, BOOL* skipThi
                         if(valueRange.location != NSNotFound){
                             NSString *str = [line substringWithRange:valueRange];
                             for (NSString *value in findStrings) {
-                                if (![str isEqualToString:[NSString stringWithFormat:@"@\"%@\"",value]]) {
+                                if (![str isEqualToString:[NSString stringWithFormat:@"\"%@\"",value]]) {
                                     continue;
                                 }
                                 StringItem *item = [[StringItem alloc]init];

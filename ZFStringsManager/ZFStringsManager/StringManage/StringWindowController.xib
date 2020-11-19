@@ -223,6 +223,17 @@
                             <action selector="tableAction:" target="-2" id="Xi3-TC-Ukx"/>
                         </connections>
                     </popUpButton>
+                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6fx-wE-91o">
+                        <rect key="frame" x="549" y="37" width="94" height="32"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="push" title="检查错误" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Jwo-XB-cE4">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" size="13" name=".PingFangSC-Regular"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="checkError:" target="-2" id="QRV-Nj-kim"/>
+                        </connections>
+                    </button>
                 </subviews>
             </view>
             <toolbar key="toolbar" implicitIdentifier="FE022600-8BEC-4CD9-9E13-4B6746454E02" autosavesConfiguration="NO" displayMode="iconOnly" sizeMode="small" id="rEi-SS-K4T">

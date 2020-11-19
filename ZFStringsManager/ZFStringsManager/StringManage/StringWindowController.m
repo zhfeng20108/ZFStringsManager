@@ -499,10 +499,10 @@
         return;
     }
     flag = YES;
-    [self checkError];
+    [self checkError:nil];
 }
 
-- (void)checkError {
+- (IBAction)checkError:(id)sender {
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         self.hansModel = [self findStringModelWithIdentifier:@"zh-Hans"];
         NSSet *keys = [NSSet setWithArray:[self.infoDict allKeys]];
